@@ -4,6 +4,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>꾸민 — AI 3D 인테리어 앱</title>
+<!-- ══ Google Analytics 4 ══ -->
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KQVKW1QK4D"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'G-KQVKW1QK4D', {
+    page_title: '꾸민 랜딩페이지',
+    page_location: window.location.href,
+    send_page_view: true
+  });
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/core/index.min.css" />
@@ -1070,7 +1084,7 @@ nav.scrolled { background: rgba(10,10,10,0.9); backdrop-filter: blur(14px); bord
     <p class="hero-sub2 reveal-wrap delay-5">
       <span class="reveal-inner">내 집에 딱 맞는 인테리어와 정확한 비용을 눈으로 확인하고 결정하세요.</span>
     </p>
-    <a href="#problem" class="hero-cta">앱 설치하고 확인해보기 <span class="cta-arrow">→</span></a>
+    <a href="#problem" class="hero-cta" onclick="gtag('event','cta_click',{event_category:'CTA',event_label:'hero_install_btn',section:'hero'})">앱 설치하고 확인해보기 <span class="cta-arrow">→</span></a>
   </div>
   <div class="scroll-hint">
     <div class="scroll-line"></div>
@@ -1146,7 +1160,7 @@ nav.scrolled { background: rgba(10,10,10,0.9); backdrop-filter: blur(14px); bord
     </div>
     <div class="conclusion-bar fade-up">
       <p class="conclusion-text">공사 전에 인테리어를 확인하고 시작할 수 있게<br><strong><span class="pink">꾸민</span>에서 직접 경험해 보세요.</strong></p>
-      <a href="#solution" class="conclusion-cta">우리집 인테리어 체험하기 →</a>
+      <a href="#solution" class="conclusion-cta" onclick="gtag('event','cta_click',{event_category:'CTA',event_label:'agitation_experience_btn',section:'agitation'})">우리집 인테리어 체험하기 →</a>
     </div>
   </div>
 </section>
@@ -1234,7 +1248,7 @@ nav.scrolled { background: rgba(10,10,10,0.9); backdrop-filter: blur(14px); bord
     </div>
 
     <div class="webgl-cta-row fade-up">
-      <a href="#" class="webgl-cta-main">내 집도 둘러보기 <span class="webgl-cta-arrow">→</span></a>
+      <a href="#" class="webgl-cta-main" onclick="gtag('event','cta_click',{event_category:'CTA',event_label:'webgl_install_btn',section:'webgl'})">내 집도 둘러보기 <span class="webgl-cta-arrow">→</span></a>
       <span class="webgl-cta-sub">무료로 시작할 수 있어요</span>
     </div>
 
@@ -1522,7 +1536,7 @@ nav.scrolled { background: rgba(10,10,10,0.9); backdrop-filter: blur(14px); bord
           <p class="n-cta-label">런칭 이벤트 혜택 받기</p>
           <p class="n-cta-sub">런칭 이후에는 동일 조건으로 제공되지 않아요</p>
         </div>
-        <a href="#cta" class="n-cta-btn">앱 설치하고 혜택받기 →</a>
+        <a href="#cta" class="n-cta-btn" onclick="gtag('event','cta_click',{event_category:'CTA',event_label:'narrowing_benefit_btn',section:'narrowing'})">앱 설치하고 혜택받기 →</a>
       </div>
     </div>
 
@@ -1618,8 +1632,8 @@ nav.scrolled { background: rgba(10,10,10,0.9); backdrop-filter: blur(14px); bord
       <h2 class="cta-title">보이는 인테리어로<br><span class="cta-accent">안심하고</span> 시작해보세요.</h2>
       <p class="cta-sub">꾸민과 함께라면 공사 전에 모든 걸 먼저 확인할 수 있어요.<br>지금 앱을 설치하고 내 집 인테리어를 시작해보세요.</p>
       <div class="cta-btns">
-        <a href="#" class="cta-btn-main">App Store</a>
-        <a href="#" class="cta-btn-main">Google Play</a>
+        <a href="#" class="cta-btn-main" onclick="gtag('event','cta_click',{event_category:'CTA',event_label:'appstore_btn',section:'cta'})">App Store</a>
+        <a href="#" class="cta-btn-main" onclick="gtag('event','cta_click',{event_category:'CTA',event_label:'googleplay_btn',section:'cta'})">Google Play</a>
       </div>
       <p class="cta-note">무료로 시작하세요 · 런칭 이벤트 혜택 적용</p>
     </div>
@@ -1764,19 +1778,64 @@ nav.scrolled { background: rgba(10,10,10,0.9); backdrop-filter: blur(14px); bord
   const nav = document.getElementById('navbar');
   window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
 
-  /* Offer 탭 전환 */
+  /* Offer 탭 전환 + 탭 클릭 트래킹 */
   function switchTab(idx) {
+    const tabNames = ['3d_view','ai_design','estimate','ai_recommend'];
     document.querySelectorAll('.offer-tab').forEach((t,i) => t.classList.toggle('active', i===idx));
     document.querySelectorAll('.offer-panel').forEach((p,i) => p.classList.toggle('active', i===idx));
+    gtag('event','offer_tab_click',{event_category:'Engagement',event_label:'offer_tab_'+tabNames[idx],tab_index:idx});
   }
 
-  /* FAQ 토글 */
+  /* FAQ 토글 + 클릭 트래킹 */
   function toggleFaq(btn) {
     const item = btn.closest('.faq-item');
     const isOpen = item.classList.contains('open');
     document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('open'));
-    if (!isOpen) item.classList.add('open');
+    if (!isOpen) {
+      item.classList.add('open');
+      const qText = btn.querySelector('span') ? btn.textContent.replace('+','').trim() : '';
+      gtag('event','faq_open',{event_category:'Engagement',event_label:qText.substring(0,50)});
+    }
   }
+
+  /* 섹션 도달 트래킹 */
+  const sectionIds = ['hero','problem','agitation','solution','webgl-experience','offer','reviews','narrowing','faq','cta'];
+  const sectionReached = new Set();
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting && !sectionReached.has(e.target.id)) {
+        sectionReached.add(e.target.id);
+        gtag('event','section_view',{event_category:'Scroll',event_label:'section_'+e.target.id});
+      }
+    });
+  }, { threshold: 0.3 });
+  sectionIds.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) sectionObserver.observe(el);
+  });
+
+  /* 스크롤 깊이 트래킹 (25 / 50 / 75 / 100%) */
+  const scrollDepthReached = new Set();
+  window.addEventListener('scroll', () => {
+    const scrollPct = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+    [25, 50, 75, 100].forEach(depth => {
+      if (scrollPct >= depth && !scrollDepthReached.has(depth)) {
+        scrollDepthReached.add(depth);
+        gtag('event','scroll_depth',{event_category:'Scroll',event_label:'depth_'+depth+'pct',value:depth});
+      }
+    });
+  });
+
+  /* 체류 시간 트래킹 (30초 / 60초 / 180초) */
+  const timeReached = new Set();
+  [30, 60, 180].forEach(sec => {
+    setTimeout(() => {
+      if (!timeReached.has(sec)) {
+        timeReached.add(sec);
+        gtag('event','time_on_page',{event_category:'Engagement',event_label:'time_'+sec+'s',value:sec});
+      }
+    }, sec * 1000);
+  });
 
   /* 스크롤 fade-up */
   const observer = new IntersectionObserver((entries) => {
@@ -1824,6 +1883,8 @@ nav.scrolled { background: rgba(10,10,10,0.9); backdrop-filter: blur(14px); bord
     if (btn.classList.contains('disabled')) return;
     document.querySelectorAll('.pano-tab').forEach(t => t.classList.remove('active'));
     btn.classList.add('active');
+    const roomName = btn.textContent.trim().replace('준비중','').trim();
+    gtag('event','panorama_tab_click',{event_category:'Engagement',event_label:'pano_'+roomName,section:'webgl'});
     initViewer(src);
   };
 
