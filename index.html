@@ -774,31 +774,263 @@ nav.scrolled { background: rgba(10,10,10,0.9); backdrop-filter: blur(14px); bord
 }
 
 /* ════════════════════════════════════
+   REVIEW SECTION
+════════════════════════════════════ */
+#reviews {
+  padding: 104px 5% 110px;
+  background: #fff;
+  overflow: hidden;
+}
+.review-inner { max-width: 1100px; margin: 0 auto; }
+.review-header { text-align: center; margin-bottom: 56px; }
+.review-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.review-card {
+  background: #f7f7f5;
+  border: 1px solid #ebebeb;
+  border-radius: 20px;
+  padding: 1.75rem 1.75rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: transform 0.25s, box-shadow 0.25s;
+  position: relative;
+}
+.review-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,0.07); }
+.review-card.featured {
+  background: linear-gradient(145deg, #fff5f7 0%, #fff 100%);
+  border-color: rgba(253,74,102,0.2);
+}
+.review-top { display: flex; align-items: center; gap: 0.75rem; }
+.review-avatar {
+  width: 42px; height: 42px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; flex-shrink: 0;
+  font-weight: 700; color: #fff;
+}
+.av1 { background: linear-gradient(135deg, #FD4A66, #ff8c55); }
+.av2 { background: linear-gradient(135deg, #6c5ce7, #a29bfe); }
+.av3 { background: linear-gradient(135deg, #00b894, #55efc4); }
+.av4 { background: linear-gradient(135deg, #e17055, #fab1a0); }
+.av5 { background: linear-gradient(135deg, #0984e3, #74b9ff); }
+.av6 { background: linear-gradient(135deg, #fd79a8, #e84393); }
+.review-meta { flex: 1; }
+.review-name { font-size: 0.9rem; font-weight: 700; color: var(--dark); }
+.review-info { font-size: 0.78rem; color: var(--gray-500); margin-top: 2px; }
+.review-stars { display: flex; gap: 2px; }
+.review-star { font-size: 0.78rem; color: #FD4A66; }
+.review-quote {
+  font-size: 0.95rem;
+  color: #333;
+  line-height: 1.75;
+  font-weight: 400;
+  word-break: keep-all;
+  flex: 1;
+}
+.review-quote::before { content: '"'; color: var(--primary); font-size: 1.2rem; font-weight: 900; line-height: 0; vertical-align: -0.15em; margin-right: 2px; }
+.review-quote::after { content: '"'; color: var(--primary); font-size: 1.2rem; font-weight: 900; line-height: 0; vertical-align: -0.15em; margin-left: 2px; }
+.review-tag {
+  display: inline-flex; align-items: center; gap: 0.3rem;
+  font-size: 0.75rem; font-weight: 600;
+  color: var(--primary); background: rgba(253,74,102,0.08);
+  border: 1px solid rgba(253,74,102,0.18);
+  padding: 0.25rem 0.7rem; border-radius: 50px;
+  align-self: flex-start;
+}
+.review-summary-bar {
+  margin-top: 48px;
+  background: var(--dark);
+  border-radius: 20px;
+  padding: 2rem 2.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.rsb-item { text-align: center; }
+.rsb-num { font-family: var(--font-en); font-size: 2rem; font-weight: 700; color: var(--primary); letter-spacing: -1px; display: block; }
+.rsb-label { font-size: 0.82rem; color: rgba(255,255,255,0.5); margin-top: 4px; font-weight: 300; }
+.rsb-divider { width: 1px; height: 40px; background: rgba(255,255,255,0.1); }
+
+/* ════════════════════════════════════
+   FAQ SECTION
+════════════════════════════════════ */
+#faq {
+  padding: 104px 5% 110px;
+  background: #f7f7f5;
+}
+.faq-inner { max-width: 800px; margin: 0 auto; }
+.faq-header { text-align: center; margin-bottom: 52px; }
+.faq-list { display: flex; flex-direction: column; gap: 12px; }
+.faq-item {
+  background: #fff;
+  border: 1px solid #e8e8e8;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: border-color 0.25s;
+}
+.faq-item.open { border-color: rgba(253,74,102,0.3); }
+.faq-q {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.35rem 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--font-ko);
+  font-size: 0.97rem;
+  font-weight: 600;
+  color: var(--dark);
+  line-height: 1.5;
+  word-break: keep-all;
+}
+.faq-icon {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--gray-100); border: 1px solid var(--gray-200);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.85rem; color: var(--gray-500);
+  flex-shrink: 0; transition: all 0.3s;
+}
+.faq-item.open .faq-icon { background: var(--primary); border-color: var(--primary); color: #fff; transform: rotate(45deg); }
+.faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.16,1,0.3,1);
+}
+.faq-a-inner {
+  padding: 0 1.5rem 1.35rem;
+  font-size: 0.92rem;
+  color: var(--gray-500);
+  line-height: 1.8;
+  font-weight: 400;
+  word-break: keep-all;
+}
+.faq-a-inner strong { color: var(--dark); font-weight: 600; }
+.faq-a-inner .highlight { color: var(--primary); font-weight: 600; }
+.faq-item.open .faq-a { max-height: 300px; }
+
+/* ════════════════════════════════════
    RESPONSIVE
 ════════════════════════════════════ */
 @media (max-width: 900px) {
+  /* Footer */
   .footer-top-row { flex-direction: column; gap: 1.25rem; }
   .footer-bottom-bar { flex-direction: column; align-items: flex-start; gap: 0.4rem; }
   .footer-bottom { flex-direction: column; align-items: flex-start; }
+
+  /* Narrowing */
   .n-cards { grid-template-columns: 1fr; }
   .n-cta-box { flex-direction: column; align-items: flex-start; }
+
+  /* Solution */
   .sol-step, .sol-step.reverse, .sol-step.wide { grid-template-columns: 1fr; gap: 3rem; }
   .sol-step.reverse .step-visual { order: 0; }
   .mockup-phone, .mockup-phone-2 { width: 200px; }
   .mockup-ipad { max-width: 380px; }
+
+  /* Offer */
   .offer-panel.active { grid-template-columns: 1fr; }
+  .offer-panel { padding: 2rem 1.75rem; }
+  .panel-visual { order: -1; }
+
+  /* Problem / Agitation */
   .problem-grid, .info-grid { grid-template-columns: 1fr; }
   .prob-card { aspect-ratio: 4/3; }
   .conclusion-bar { flex-direction: column; align-items: flex-start; }
+
+  /* Hero trust bar */
+  .hero-trust { flex-wrap: wrap; height: auto; padding: 0.75rem 5%; justify-content: flex-start; gap: 0.5rem; }
+  .trust-item { padding: 0.35rem 1rem; font-size: 0.75rem; }
+  .trust-item:not(:last-child)::after { display: none; }
+
+  /* Review */
+  .review-grid { grid-template-columns: 1fr 1fr; }
+  .review-summary-bar { gap: 1rem; }
+  .rsb-divider { display: none; }
+  .rsb-item { flex: 1; min-width: 120px; }
+
+  /* Agitation */
   .webgl-layout { grid-template-columns: 1fr; }
   .webgl-panel { flex-direction: row; flex-wrap: wrap; }
   .panel-block { flex: 1; min-width: 200px; }
-  .trust-item { padding: 0 1.25rem; font-size: 0.75rem; }
 }
+
 @media (max-width: 600px) {
+  /* Nav */
   .nav-links { display: none; }
-  .offer-tabs { gap: 0.4rem; }
-  .offer-tab { padding: 0.5rem 0.9rem; font-size: 0.8rem; }
+
+  /* Hero */
+  .hero-headline { font-size: clamp(2rem, 8vw, 2.6rem); }
+  .hero-cta { font-size: 0.9rem; padding: 0.85rem 1.75rem; }
+  .hero-trust { gap: 0.4rem; }
+  .trust-item { font-size: 0.72rem; padding: 0.3rem 0.75rem; }
+
+  /* Problem */
+  #problem { padding: 72px 5% 80px; }
+  .problem-grid { grid-template-columns: 1fr; gap: 14px; }
+  .prob-card { aspect-ratio: 3/2; }
+
+  /* Agitation */
+  #agitation { padding: 72px 5% 80px; }
+  .info-grid { grid-template-columns: 1fr; gap: 12px; }
+
+  /* Solution */
+  #solution { padding: 72px 5% 88px; }
+  .sol-header { margin-bottom: 52px; }
+  .sol-steps { gap: 64px; }
+  .step-title { font-size: 1.25rem; }
+  .mockup-phone, .mockup-phone-2 { width: 180px; }
+  .mockup-ipad { max-width: 100%; }
+
+  /* WebGL */
+  #webgl-experience { padding: 72px 5% 80px; }
+  .pano-tabs { gap: 0.35rem; }
+  .pano-tab { font-size: 0.8rem; padding: 0.5rem 0.9rem; }
+  #pano-viewer { height: 260px; }
+  .webgl-cta-row { flex-direction: column; gap: 0.6rem; text-align: center; }
+
+  /* Offer */
+  #offer { padding: 72px 5% 80px; }
+  .offer-tabs { flex-direction: column; align-items: stretch; gap: 0.4rem; }
+  .offer-tab { border-radius: 12px; padding: 0.75rem 1rem; text-align: left; }
+  .offer-panel { padding: 1.5rem 1.25rem; gap: 2rem; }
+  .panel-title { font-size: 1.3rem; }
+
+  /* Review */
+  #reviews { padding: 72px 5% 80px; }
+  .review-grid { grid-template-columns: 1fr; }
+  .review-summary-bar { padding: 1.5rem; flex-direction: column; align-items: center; gap: 1.25rem; }
+  .rsb-divider { display: none; }
+
+  /* Narrowing */
+  #narrowing { padding: 72px 5% 80px; }
+  .n-card { padding: 1.5rem 1.25rem; }
+  .n-cta-box { padding: 1.25rem 1.25rem; }
+
+  /* FAQ */
+  #faq { padding: 72px 5% 80px; }
+  .faq-q { font-size: 0.92rem; padding: 1.1rem 1.25rem; }
+  .faq-a-inner { padding: 0 1.25rem 1.1rem; }
+
+  /* CTA */
+  #cta { padding: 88px 5%; }
+  .cta-title { font-size: clamp(1.7rem, 6vw, 2.2rem); }
+  .cta-btns { flex-direction: column; align-items: center; }
+  .cta-btn-main { width: 100%; max-width: 280px; justify-content: center; }
+
+  /* Footer */
+  .footer-main { padding: 40px 5% 28px; }
+  .footer-biz-info { font-size: 0.72rem; }
+  .footer-bottom-bar { flex-direction: column; gap: 0.25rem; }
+  .footer-bottom-center { text-align: left; }
 }
 </style>
 </head>
@@ -1111,6 +1343,135 @@ nav.scrolled { background: rgba(10,10,10,0.9); backdrop-filter: blur(14px); bord
   </div>
 </section>
 
+<!-- ══ REVIEWS ══ -->
+<section id="reviews">
+  <div class="review-inner">
+
+    <div class="review-header fade-up">
+      <div class="sec-label">✦ 사용자 후기</div>
+      <h2 class="sec-title">꾸민을 먼저 써본<br><span class="accent">베타 유저들의 이야기</span></h2>
+      <p class="sec-sub">직접 사용해본 분들이 남긴 솔직한 후기예요.</p>
+    </div>
+
+    <div class="review-grid">
+
+      <div class="review-card featured fade-up">
+        <div class="review-top">
+          <div class="review-avatar av1">김</div>
+          <div class="review-meta">
+            <div class="review-name">김지은 님</div>
+            <div class="review-info">32평 아파트 전체 인테리어</div>
+            <div class="review-stars">
+              <span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span>
+            </div>
+          </div>
+        </div>
+        <p class="review-quote">공사 전에 3D로 직접 눈으로 보고 결정하니까 불안함이 없었어요. 예전엔 공사 끝나고 '이게 아닌데...' 했던 적도 있었는데 이번엔 딱 원하는 대로 나왔어요.</p>
+        <span class="review-tag">✓ 비용 절감 경험</span>
+      </div>
+
+      <div class="review-card fade-up d1">
+        <div class="review-top">
+          <div class="review-avatar av2">박</div>
+          <div class="review-meta">
+            <div class="review-name">박민준 님</div>
+            <div class="review-info">신혼집 인테리어 계획 중</div>
+            <div class="review-stars">
+              <span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span>
+            </div>
+          </div>
+        </div>
+        <p class="review-quote">견적이 투명하게 딱 나오는 게 제일 좋았어요. 업체마다 다 다르게 부르니까 뭐가 맞는건지 모르겠었는데, 항목별로 다 보여주니까 비교도 되고 믿음직스러웠어요.</p>
+        <span class="review-tag">✓ 견적 투명성 만족</span>
+      </div>
+
+      <div class="review-card fade-up d2">
+        <div class="review-top">
+          <div class="review-avatar av3">이</div>
+          <div class="review-meta">
+            <div class="review-name">이수연 님</div>
+            <div class="review-info">주방 & 거실 리모델링</div>
+            <div class="review-stars">
+              <span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span>
+            </div>
+          </div>
+        </div>
+        <p class="review-quote">인테리어 스타일을 어떻게 정해야 할 지 막막했는데 이미지 고르다 보니까 내가 원하는 게 뭔지 알게 됐어요. AI가 취향 분석해준 게 생각보다 정확했어요.</p>
+        <span class="review-tag">✓ 스타일 결정에 도움</span>
+      </div>
+
+      <div class="review-card fade-up">
+        <div class="review-top">
+          <div class="review-avatar av4">최</div>
+          <div class="review-meta">
+            <div class="review-name">최도현 님</div>
+            <div class="review-info">34평 거실 & 침실 시공</div>
+            <div class="review-stars">
+              <span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span>
+            </div>
+          </div>
+        </div>
+        <p class="review-quote">3D로 먼저 보고 결정했더니 시공 중에 '이 색 맞아요?' 같은 컨펌 과정이 확 줄었어요. 시공팀이랑 소통도 훨씬 명확했고, 원하는 결과물이 그대로 나왔어요.</p>
+        <span class="review-tag">✓ 시공 소통 개선</span>
+      </div>
+
+      <div class="review-card fade-up d1">
+        <div class="review-top">
+          <div class="review-avatar av5">정</div>
+          <div class="review-meta">
+            <div class="review-name">정하은 님</div>
+            <div class="review-info">25평 원룸 풀 인테리어</div>
+            <div class="review-stars">
+              <span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span>
+            </div>
+          </div>
+        </div>
+        <p class="review-quote">주소 입력하니까 도면이 바로 나오는 게 신기했어요. 다른 앱은 직접 평면도를 그려야 해서 포기했는데 꾸민은 진짜 5분 만에 내 집 3D가 완성되더라고요.</p>
+        <span class="review-tag">✓ 간편한 시작</span>
+      </div>
+
+      <div class="review-card fade-up d2">
+        <div class="review-top">
+          <div class="review-avatar av6">강</div>
+          <div class="review-meta">
+            <div class="review-name">강서준 님</div>
+            <div class="review-info">40평대 아파트 전체 공사</div>
+            <div class="review-stars">
+              <span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span>
+            </div>
+          </div>
+        </div>
+        <p class="review-quote">실속형, 최적형, 프리미엄 세 가지 비교하면서 예산 조정하는 게 너무 편했어요. 공사비가 얼마나 줄거나 늘거나 바로 계산되니까 예산 계획 세우기가 훨씬 수월했어요.</p>
+        <span class="review-tag">✓ 예산 계획 수립</span>
+      </div>
+
+    </div>
+
+    <div class="review-summary-bar fade-up">
+      <div class="rsb-item">
+        <span class="rsb-num">4.9</span>
+        <div class="rsb-label">평균 별점 (베타 유저 기준)</div>
+      </div>
+      <div class="rsb-divider"></div>
+      <div class="rsb-item">
+        <span class="rsb-num">96%</span>
+        <div class="rsb-label">지인 추천 의향</div>
+      </div>
+      <div class="rsb-divider"></div>
+      <div class="rsb-item">
+        <span class="rsb-num">4,200+</span>
+        <div class="rsb-label">사전등록 완료</div>
+      </div>
+      <div class="rsb-divider"></div>
+      <div class="rsb-item">
+        <span class="rsb-num">16%</span>
+        <div class="rsb-label">평균 비용 절감</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <!-- ══ NARROWING (런칭이벤트) ══ -->
 <section id="narrowing">
   <div class="narrowing-inner">
@@ -1165,6 +1526,82 @@ nav.scrolled { background: rgba(10,10,10,0.9); backdrop-filter: blur(14px); bord
       </div>
     </div>
 
+  </div>
+</section>
+
+<!-- ══ FAQ ══ -->
+<section id="faq">
+  <div class="faq-inner">
+
+    <div class="faq-header fade-up">
+      <div class="sec-label">자주 묻는 질문</div>
+      <h2 class="sec-title">궁금한 점이 있으신가요?</h2>
+      <p class="sec-sub">꾸민에 대해 가장 많이 물어보시는 질문들을 모았어요.</p>
+    </div>
+
+    <div class="faq-list fade-up">
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          우리 아파트 도면이 없으면 어떡하나요?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">꾸민은 <strong>전국 아파트 도면 DB</strong>를 자체 보유하고 있어요. 아파트 단지명이나 주소만 입력하면 자동으로 도면을 불러와요. 현재는 <span class="highlight">아파트 전용</span>으로 운영 중이며, 빌라·오피스텔 등 다른 주거 형태도 순차적으로 추가할 예정이에요.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          3D로 보는 결과가 실제 시공과 얼마나 비슷한가요?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">꾸민의 3D 렌더링은 실제 자재와 색상 데이터를 기반으로 제작돼요. 다만 <strong>조명 환경, 실제 자재 질감, 시공 오차</strong> 등으로 인해 일부 차이가 있을 수 있어요. 최종 결과물과의 유사도를 높이기 위해 전문 디자이너와의 1:1 컨설팅을 함께 권장드려요.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          견적이 실제 공사비와 크게 차이 나지 않나요?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">꾸민은 <strong>직영공사 운영</strong>을 통해 중간 마진 없이 실제 시공 단가를 기반으로 견적을 산출해요. 평균 오차율은 <span class="highlight">4.2%</span>로 업계 최저 수준이에요. 자재 선택과 시공 범위에 따라 견적이 실시간으로 반영되기 때문에 예산 내에서 조정도 쉽게 할 수 있어요.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          앱은 무료로 사용할 수 있나요?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">네, <strong>꾸민은 무료로 다운로드하고 사용할 수 있어요.</strong> 주소 입력, 도면 확인, 스타일 선택, 3D 디자인 생성, 견적 확인까지 모두 무료예요. 실제 시공을 진행하거나 전문 디자이너 매칭 등 일부 프리미엄 기능은 유료로 제공될 수 있어요.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          인테리어를 처음 해보는데 어렵지 않을까요?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">꾸민은 <strong>인테리어를 처음 해보는 분들을 위해 설계된 앱이에요.</strong> 복잡한 설명 없이 이미지를 보고 고르기만 하면 AI가 취향을 분석하고 디자인을 완성해줘요. 어려운 용어나 전문 지식이 없어도 단 3단계로 내 집 인테리어를 시작할 수 있어요.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          시공도 꾸민에서 직접 진행하나요?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">네, 꾸민은 앱 설계부터 실제 시공까지 <strong>원스톱으로 진행</strong>할 수 있어요. 직영 시공팀 운영을 통해 중간 업체 없이 꾸민이 직접 공사를 진행해요. 시공 전 전문 디자이너와의 상담을 통해 3D 결과물과 최대한 동일하게 시공해 드려요.</div>
+        </div>
+      </div>
+
+    </div>
   </div>
 </section>
 
@@ -1331,6 +1768,14 @@ nav.scrolled { background: rgba(10,10,10,0.9); backdrop-filter: blur(14px); bord
   function switchTab(idx) {
     document.querySelectorAll('.offer-tab').forEach((t,i) => t.classList.toggle('active', i===idx));
     document.querySelectorAll('.offer-panel').forEach((p,i) => p.classList.toggle('active', i===idx));
+  }
+
+  /* FAQ 토글 */
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
   }
 
   /* 스크롤 fade-up */
