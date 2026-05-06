@@ -1302,7 +1302,7 @@ nav.scrolled { background: rgba(10,10,10,0.9); backdrop-filter: blur(14px); bord
     <div class="webgl-header fade-up">
       <div class="sec-label" style="background:rgba(253,74,102,0.15)">✦ 직접 체험해보세요</div>
       <h2 class="webgl-title">공사 전에 <span class="accent">우리 집을 먼저</span> 둘러보세요</h2>
-      <p class="webgl-sub">드래그해서 360도 자유롭게 둘러보세요</p>
+      <p class="webgl-sub">3D 디자인이 완성되면 이렇게 볼 수 있어요!</p>
     </div>
 
     <!-- 공간 탭 -->
@@ -1310,11 +1310,14 @@ nav.scrolled { background: rgba(10,10,10,0.9); backdrop-filter: blur(14px); bord
       <button class="pano-tab active" onclick="switchPano(this, 'panorama_living.png')">
         <span class="pano-tab-icon">🛋️</span> 거실 &amp; 주방
       </button>
-      <button class="pano-tab disabled" onclick="void(0)">
-        <span class="pano-tab-icon">🛏️</span> 침실 <span class="pano-soon">준비중</span>
+      <button class="pano-tab" onclick="switchPano(this, 'panorama_bedroom.png')">
+        <span class="pano-tab-icon">🛏️</span> 침실
       </button>
-      <button class="pano-tab disabled" onclick="void(0)">
-        <span class="pano-tab-icon">🚿</span> 욕실 <span class="pano-soon">준비중</span>
+      <button class="pano-tab" onclick="switchPano(this, 'panorama_bathroom.png')">
+        <span class="pano-tab-icon">🚿</span> 욕실
+      </button>
+      <button class="pano-tab" onclick="switchPano(this, 'panorama_entrance.png')">
+        <span class="pano-tab-icon">🚪</span> 현관
       </button>
     </div>
 
