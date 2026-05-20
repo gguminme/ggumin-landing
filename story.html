@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>꾸민(ggumin) — 브랜드 스토리 | 현장에서 시작된 이야기</title>
+    <meta name="description" content="인테리어 현장에서 시작된 AI 인테리어 앱 꾸민의 이야기. CES 혁신상 연속 수상, 삼성 파트너사. 단순한 견적이 아닌, 정확한 디자인과 제품 가격을 투명하게 공개합니다.">
+    <meta property="og:title" content="꾸민(ggumin) — 현장에서 시작된 이야기">
+    <meta property="og:description" content="인테리어 업체가 쓰던 3D 기술이 일반 소비자에게로. 투명한 인테리어를 만드는 꾸민의 브랜드 스토리.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+    <style>
+        :root {
+            /* Navy system */
+            --navy-deep: #1A2340;
+            --navy-main: #222B4D;
+            --navy-darkest: #141A30;
+            --navy-tint: #EDF0F7;
+            /* Pink brand */
+            --pink: #E84968;
+            --pink-deep: #D13354;
+            --pink-soft: rgba(232, 73, 104, 0.12);
+            /* Neutrals */
+            --paper: #F7F8FB;
+            --paper-pure: #FFFFFF;
+            --ink: #1F2438;
+            --ink-soft: #5C6480;
+            --line: rgba(31, 36, 56, 0.1);
+            /* Dark section accents */
+            --gold: #C9A876;
+            --paper-on-dark: #EEF0F7;
+            --paper-on-dark-soft: rgba(238, 240, 247, 0.65);
+            --line-on-dark: rgba(238, 240, 247, 0.15);
+            --pink-on-dark: #FF6B86;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Pretendard Variable', Pretendard, -apple-system, sans-serif; background: var(--paper); color: var(--ink); line-height: 1.6; overflow-x: hidden; }
+        .grain { position: fixed; inset: 0; pointer-events: none; opacity: 0.04; z-index: 1;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+        .cursor-glow { position: fixed; width: 400px; height: 400px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(232, 73, 104, 0.07), transparent 70%);
+            pointer-events: none; transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1); z-index: 2;
+            transform: translate(-50%, -50%); }
+        nav { position: fixed; top: 0; left: 0; right: 0; padding: 1.25rem 2rem; display: flex; justify-content: space-between; align-items: center;
+            z-index: 100; background: rgba(247, 248, 251, 0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--line);
+            transition: background 0.5s, border-color 0.5s; }
+        nav.on-dark { background: rgba(20, 26, 48, 0.85); border-bottom-color: var(--line-on-dark); }
+        nav.on-dark .logo { color: var(--pink-on-dark); }
+        nav.on-dark .nav-links a { color: var(--paper-on-dark-soft); }
+        nav.on-dark .nav-links a:hover { color: var(--pink-on-dark); }
+        .logo { font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 1.5rem; color: var(--pink);
+            letter-spacing: -0.02em; text-decoration: none; transition: color 0.5s; }
+        .nav-links { display: flex; gap: 2rem; font-size: 0.9rem; font-weight: 500; }
+        .nav-links a { color: var(--ink-soft); text-decoration: none; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--pink); }
+        .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
+            padding: 8rem 2rem 4rem; position: relative; text-align: center; background: var(--paper); }
+        .hero-tag { font-family: 'Nunito', sans-serif; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.3em;
+            color: var(--pink); text-transform: uppercase; margin-bottom: 2rem; opacity: 0; animation: fadeUp 1s 0.2s forwards; }
+        .hero h1 { font-size: clamp(2.5rem, 7vw, 5.5rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.04em;
+            margin-bottom: 2rem; max-width: 1100px; opacity: 0; animation: fadeUp 1s 0.4s forwards; color: var(--navy-deep); }
+        .hero h1 .accent { color: var(--pink); position: relative; display: inline-block; }
+        .hero h1 .accent::after { content: ''; position: absolute; left: 0; bottom: 0.1em; width: 100%; height: 0.15em;
+            background: var(--pink); opacity: 0.3; border-radius: 4px; }
+        .hero-sub { font-size: clamp(1rem, 2vw, 1.25rem); color: var(--ink-soft); max-width: 600px; margin-bottom: 3rem;
+            opacity: 0; animation: fadeUp 1s 0.6s forwards; }
+        .scroll-indicator { position: absolute; bottom: 3rem; left: 50%; transform: translateX(-50%); opacity: 0; animation: fadeUp 1s 1.2s forwards; }
+        .scroll-indicator span { display: block; font-family: 'Nunito', sans-serif; font-size: 0.75rem; letter-spacing: 0.3em; color: var(--ink-soft); margin-bottom: 0.5rem; }
+        .scroll-line { width: 1px; height: 60px; background: linear-gradient(to bottom, var(--pink), transparent); margin: 0 auto; animation: scrollLine 2s ease-in-out infinite; }
+        @keyframes scrollLine { 0%, 100% { transform: scaleY(0); transform-origin: top; } 50% { transform: scaleY(1); transform-origin: top; } 50.01% { transform-origin: bottom; } }
+        .float-shape { position: absolute; border-radius: 50%; opacity: 0.5; animation: float 10s ease-in-out infinite; }
+        .shape-1 { width: 300px; height: 300px; top: 15%; left: -100px; background: var(--pink-soft); }
+        .shape-2 { width: 200px; height: 200px; bottom: 20%; right: -50px; background: var(--navy-tint); animation-delay: 2s; }
+        .shape-3 { width: 100px; height: 100px; top: 30%; right: 15%; border: 2px solid var(--pink); opacity: 0.25; background: transparent; animation-delay: 4s; }
+        @keyframes float { 0%, 100% { transform: translate(0, 0) rotate(0deg); } 33% { transform: translate(30px, -30px) rotate(120deg); } 66% { transform: translate(-20px, 20px) rotate(240deg); } }
+        /* ── 전체 타이포 계층 시스템 ── */
+        :root {
+            --t-chapter: 0.8rem;      /* CHAPTER 01 라벨 */
+            --t-title: clamp(1.8rem, 3.8vw, 2.5rem);   /* 각 챕터 대제목 */
+            --t-subtitle: clamp(1.15rem, 2vw, 1.35rem); /* 소제목 (카드 제목 등) */
+            --t-body: clamp(1rem, 1.5vw, 1.1rem);       /* 본문 */
+            --t-detail: 0.95rem;      /* 상세 설명 (카드 내 p 등) */
+        }
+        section { position: relative; padding: 7rem 2rem; max-width: 1200px; margin: 0 auto; }
+        .section-num { font-family: 'Nunito', sans-serif; font-size: var(--t-chapter); font-weight: 700; letter-spacing: 0.3em; color: var(--pink);
+            margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; }
+        .section-num::before { content: ''; width: 30px; height: 1px; background: var(--pink); }
+        .section-title { font-size: var(--t-title); font-weight: 800; line-height: 1.25; letter-spacing: -0.04em;
+            margin-bottom: 2rem; white-space: nowrap; color: var(--navy-deep); }
+        .section-text { font-size: var(--t-body); line-height: 1.8; color: var(--ink-soft); max-width: 720px; margin-bottom: 1.25rem; }
+        .section-text strong { color: var(--ink); font-weight: 700; }
+        .reveal { opacity: 0; transform: translateY(40px); transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .img-placeholder { width: 100%; height: 100%; min-height: 280px; background: linear-gradient(135deg, var(--navy-tint), var(--pink-soft));
+            border: 2px dashed rgba(232, 73, 104, 0.3); border-radius: 24px; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; color: var(--ink-soft); text-align: center; padding: 2rem; font-size: 0.9rem; }
+        .img-placeholder .icon { font-size: 2.5rem; margin-bottom: 1rem; opacity: 0.5; }
+        .img-placeholder .label { font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 0.75rem; letter-spacing: 0.2em; color: var(--pink); margin-bottom: 0.5rem; }
+        /* Chapter 01 - 밝은 섹션 */
+        .ch-01 { background: var(--paper-pure); max-width: none; }
+        .ch-01-inner { max-width: 1200px; margin: 0 auto; }
+        /* SLOT 01이 대제목과 같은 줄부터 시작하도록 그리드 구성 */
+        .ch01-layout { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 4rem; align-items: start; }
+        .ch01-left { }
+        .ch01-headline { margin: 1.5rem 0 2rem; }
+        .ch01-headline p { font-size: var(--t-subtitle); line-height: 1.6; font-weight: 600; color: var(--ink); }
+        .ch01-headline p strong { color: var(--pink); font-weight: 800; }
+        .ch01-desc { font-size: var(--t-body); line-height: 1.8; color: var(--ink-soft); }
+        .ch01-right { position: sticky; top: 100px; }
+        .ch01-right .img-placeholder { aspect-ratio: 3/4; min-height: 380px; }
+        .reason-cards { display: grid; gap: 1rem; margin-top: 3rem; }
+        .reason-card { padding: 1.75rem 2rem; background: var(--paper); border-radius: 20px; border: 1px solid var(--line);
+            display: grid; grid-template-columns: 50px 1fr; gap: 1.25rem; align-items: start;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reason-card:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(31, 36, 56, 0.08); }
+        .reason-num { font-family: 'Nunito', sans-serif; font-size: 1.8rem; font-weight: 900; color: var(--pink); line-height: 1; }
+        .reason-card h3 { font-size: var(--t-subtitle); font-weight: 700; margin-bottom: 0.5rem; color: var(--navy-deep); }
+        .reason-card p { color: var(--ink-soft); font-size: var(--t-detail); line-height: 1.65; }
+        .pain-quote { margin-top: 3rem; padding: 2rem; background: var(--navy-tint); border-left: 4px solid var(--pink);
+            border-radius: 0 16px 16px 0; font-size: 1.05rem; line-height: 1.7; color: var(--ink); }
+        .pain-quote strong { color: var(--pink); font-weight: 700; }
+        /* Chapter 02 - 네이비 섹션 */
+        .ch-02 { background: var(--navy-main); max-width: none; padding: 8rem 2rem; color: var(--paper-on-dark); position: relative; overflow: hidden; }
+        .ch-02::before { content: ''; position: absolute; top: -20%; right: -10%; width: 50%; height: 80%;
+            background: radial-gradient(circle, rgba(232, 73, 104, 0.08), transparent 60%); pointer-events: none; }
+        .ch-02-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 2; }
+        .ch-02 .section-num { color: var(--pink-on-dark); }
+        .ch-02 .section-num::before { background: var(--pink-on-dark); }
+        .ch-02 .section-title { color: var(--paper-on-dark); }
+        .ch-02 .section-text { color: var(--paper-on-dark-soft); }
+        .ch-02 .section-text strong { color: var(--paper-on-dark); }
+        .limits-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 3rem; }
+        .limit-card { padding: 2rem; background: rgba(238, 240, 247, 0.04); border: 1px solid var(--line-on-dark); border-radius: 20px;
+            transition: all 0.5s; backdrop-filter: blur(10px); }
+        .limit-card:hover { border-color: var(--pink-on-dark); transform: translateY(-4px); background: rgba(238, 240, 247, 0.07); }
+        .limit-icon { width: 44px; height: 44px; background: var(--pink-soft); border-radius: 12px;
+            display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem; font-size: 1.3rem; }
+        .limit-card h3 { font-size: var(--t-subtitle); font-weight: 700; margin-bottom: 0.6rem; color: var(--paper-on-dark); }
+        .limit-card p { color: var(--paper-on-dark-soft); font-size: var(--t-detail); line-height: 1.65; }
+        .key-message { margin-top: 3rem; padding: 2.5rem; background: linear-gradient(135deg, var(--pink), var(--pink-deep)); border-radius: 24px; text-align: center; }
+        .key-message p { font-size: 1.15rem; line-height: 1.7; color: #fff; font-weight: 500; }
+        .key-message strong { color: #fff; font-weight: 800; text-decoration: underline; text-underline-offset: 4px; }
+        /* Chapter 02 — 한계 카드 영역에 이미지를 배경으로 */
+        .limits-bg-wrap { position: relative; margin-top: 3rem; border-radius: 28px; overflow: hidden; }
+        .limits-bg-img { position: absolute; inset: 0; z-index: 0;
+            background-image: url('story-ch02-bg.jpg');
+            background-size: cover; background-position: center;
+            opacity: 0.18; filter: saturate(0.6) brightness(0.7);
+            transition: opacity 0.5s; }
+        .limits-bg-wrap:hover .limits-bg-img { opacity: 0.24; }
+        .limits-bg-overlay { position: absolute; inset: 0; z-index: 1;
+            background: linear-gradient(180deg, rgba(34, 43, 77, 0.55) 0%, rgba(26, 35, 64, 0.85) 100%); }
+        .limits-bg-wrap .limits-grid { position: relative; z-index: 2; margin-top: 0; padding: 2.5rem; }
+        .limits-bg-wrap .limit-card { background: rgba(238, 240, 247, 0.06); backdrop-filter: blur(14px); }
+        /* Chapter 03 - Fullscreen Impact */
+        .ch-03-impact { min-height: 100vh; max-width: none; padding: 0; margin: 0; position: relative;
+            display: flex; align-items: center; justify-content: center; overflow: hidden;
+            background-color: var(--navy-darkest); background-image: url('story-ch03-bg.jpg');
+            background-size: cover; background-position: center; background-attachment: fixed; }
+        .ch-03-overlay { position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(20, 26, 48, 0.88) 0%, rgba(26, 35, 64, 0.72) 50%, rgba(20, 26, 48, 0.88) 100%); }
+        .ch-03-content { position: relative; z-index: 2; text-align: center; color: var(--paper-on-dark); padding: 4rem 2rem; max-width: 1100px; }
+        .ch-03-label { font-family: 'Nunito', sans-serif; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.4em; color: var(--pink-on-dark);
+            text-transform: uppercase; margin-bottom: 2.5rem; display: inline-block; padding: 0.5rem 1.5rem;
+            border: 1px solid rgba(255, 107, 134, 0.5); border-radius: 100px; }
+        .ch-03-bridge { font-size: clamp(1.1rem, 2vw, 1.4rem); color: var(--paper-on-dark-soft); margin-bottom: 2rem; font-weight: 400; letter-spacing: 0.05em; }
+        .ch-03-headline { font-size: clamp(1.8rem, 4.5vw, 3rem); font-weight: 700; line-height: 1.3; letter-spacing: -0.03em; margin-bottom: 3rem; color: var(--paper-on-dark); }
+        .ch-03-brand { font-family: 'Nunito', sans-serif; font-size: clamp(5rem, 14vw, 11rem); font-weight: 900; line-height: 1;
+            letter-spacing: -0.05em; color: var(--paper-on-dark); margin: 1rem 0; position: relative; display: inline-block; }
+        .ch-03-brand::after { content: ''; position: absolute; bottom: -0.5rem; left: 50%; transform: translateX(-50%);
+            width: 60%; height: 3px; background: linear-gradient(90deg, transparent, var(--pink-on-dark), transparent); }
+        .ch-03-scroll { position: absolute; bottom: 3rem; left: 50%; transform: translateX(-50%); color: var(--paper-on-dark-soft); }
+        .ch-03-scroll span { font-family: 'Nunito', sans-serif; font-size: 0.75rem; letter-spacing: 0.3em; }
+        .ch-03-scroll-line { width: 1px; height: 50px; background: linear-gradient(to bottom, var(--pink-on-dark), transparent); margin: 0.5rem auto 0; animation: scrollLine 2s ease-in-out infinite; }
+        /* Chapter 03 Body - 밝은 섹션 */
+        .ch-03-body { background: var(--paper); padding: 8rem 2rem; max-width: none; }
+        .ch-03-body-inner { max-width: 1100px; margin: 0 auto; }
+        .ch-03-body .section-text { font-size: clamp(1.1rem, 1.6vw, 1.25rem); }
+        /* CHAPTER 03 질문 - 두 개로 분리 */
+        .question-block { margin-top: 4rem; }
+        .question-intro { font-family: 'Nunito', sans-serif; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.25em;
+            color: var(--pink); text-transform: uppercase; margin-bottom: 1.5rem; }
+        .question-item { padding: 2.5rem; background: var(--paper-pure); border-radius: 24px; border: 1px solid var(--line);
+            margin-bottom: 1.25rem; position: relative; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 10px 30px rgba(31, 36, 56, 0.04); }
+        .question-item:hover { transform: translateX(6px); border-color: var(--pink); }
+        .question-item:last-of-type { margin-bottom: 0; }
+        .question-q { font-family: 'Nunito', sans-serif; font-size: 2.5rem; font-weight: 900; color: var(--pink-soft);
+            position: absolute; top: 1.2rem; right: 1.8rem; line-height: 1; }
+        .question-q-mark { color: var(--pink); }
+        .question-text { font-size: clamp(1.1rem, 1.9vw, 1.35rem); line-height: 1.6; color: var(--navy-deep); font-weight: 600;
+            position: relative; z-index: 2; padding-right: 3rem; }
+        .question-conclusion { margin-top: 2.5rem; padding: 2rem; background: var(--navy-main); border-radius: 20px;
+            text-align: center; }
+        .question-conclusion p { font-size: clamp(1.1rem, 2vw, 1.35rem); font-weight: 700; color: var(--paper-on-dark); line-height: 1.5; }
+        .question-conclusion .pink-accent { color: var(--pink-on-dark); }
+        /* Chapter 04 - 밝은 섹션 */
+        .ch-04 { background: var(--paper-pure); max-width: none; padding: 8rem 2rem; }
+        .ch-04-inner { max-width: 1200px; margin: 0 auto; }
+        /* Chapter 04 타임라인 */
+        .timeline { margin: 3.5rem 0 2rem; position: relative; max-width: 820px; }
+        .timeline::before { content: ''; position: absolute; left: 23px; top: 12px; bottom: 12px;
+            width: 2px; background: linear-gradient(to bottom, var(--pink) 0%, var(--pink) 70%, var(--line) 100%); }
+        .tl-step { position: relative; padding-left: 5rem; padding-bottom: 3rem; }
+        .tl-step:last-child { padding-bottom: 0; }
+        .tl-marker { position: absolute; left: 0; top: 0; width: 48px; height: 48px; border-radius: 50%;
+            background: var(--paper-pure); border: 2px solid var(--pink); display: flex; align-items: center;
+            justify-content: center; font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 0.95rem;
+            color: var(--pink); z-index: 2; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+        .tl-step.active .tl-marker { background: var(--pink); color: #fff; transform: scale(1.1); }
+        .tl-stage { font-family: 'Nunito', sans-serif; font-size: var(--t-chapter); font-weight: 700; letter-spacing: 0.2em;
+            color: var(--pink); text-transform: uppercase; margin-bottom: 0.6rem; }
+        .tl-title { font-size: var(--t-subtitle); font-weight: 800; color: var(--navy-deep);
+            letter-spacing: -0.03em; margin-bottom: 1rem; line-height: 1.3; }
+        .tl-body { font-size: var(--t-body); line-height: 1.8; color: var(--ink-soft); }
+        .tl-body strong { color: var(--ink); font-weight: 700; }
+        .tl-quote { margin-top: 1.25rem; padding: 1.5rem 1.75rem; background: var(--navy-tint);
+            border-left: 3px solid var(--pink); border-radius: 0 14px 14px 0; font-size: var(--t-body);
+            line-height: 1.7; color: var(--navy-deep); font-weight: 500; font-style: italic; }
+        .tl-step.highlight .tl-card { background: linear-gradient(135deg, var(--navy-main), var(--navy-deep));
+            padding: 2rem; border-radius: 20px; margin-top: 0.25rem; }
+        .tl-step.highlight .tl-stage { color: var(--pink-on-dark); }
+        .tl-step.highlight .tl-title { color: var(--paper-on-dark); }
+        .tl-step.highlight .tl-body { color: var(--paper-on-dark-soft); }
+        .tl-step.highlight .tl-body strong { color: var(--pink-on-dark); }
+        .tech-section-title { margin-top: 5rem; text-align: center; }
+        .tech-section-title .small-tag { font-family: 'Nunito', sans-serif; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.3em;
+            color: var(--pink); text-transform: uppercase; margin-bottom: 1rem; display: block; }
+        .tech-section-title h3 { font-size: var(--t-title); font-weight: 800; letter-spacing: -0.03em; line-height: 1.3; color: var(--navy-deep); }
+        .tech-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 3rem; }
+        .tech-card { padding: 2rem; background: var(--paper); border: 1px solid var(--line); border-radius: 24px;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); position: relative; overflow: hidden; }
+        .tech-card:hover { transform: translateY(-6px); box-shadow: 0 25px 50px rgba(31, 36, 56, 0.1); border-color: var(--pink); }
+        .tech-card.featured { background: linear-gradient(135deg, var(--navy-main) 0%, var(--navy-deep) 100%); color: var(--paper-on-dark); }
+        .tech-card.featured .tech-icon-wrap { background: rgba(232, 73, 104, 0.18); }
+        .tech-card.featured h4 { color: var(--paper-on-dark); }
+        .tech-card.featured p { color: var(--paper-on-dark-soft); }
+        .tech-icon-wrap { width: 48px; height: 48px; background: var(--pink-soft); border-radius: 14px;
+            display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem; font-size: 1.4rem; }
+        .tech-card h4 { font-size: var(--t-subtitle); font-weight: 700; margin-bottom: 0.6rem; color: var(--navy-deep); line-height: 1.3; }
+        .tech-card p { color: var(--ink-soft); font-size: var(--t-detail); line-height: 1.6; }
+        .tech-card.featured h4, .tech-card.featured p { }
+        .badge-shine { display: inline-block; padding: 0.25rem 0.6rem; background: var(--pink); color: white;
+            font-family: 'Nunito', sans-serif; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em; border-radius: 6px; margin-bottom: 0.75rem; }
+        .credentials-img-area { margin-top: 4rem; padding: 3rem; background: var(--navy-tint); border-radius: 28px; text-align: center; }
+        .credentials-img-area .img-placeholder { max-width: 700px; aspect-ratio: 16/9; min-height: 0; margin: 0 auto; background: var(--paper-pure); }
+        .pc-version-card { margin-top: 4rem; background: var(--paper); border: 1px solid var(--line); border-radius: 32px;
+            overflow: hidden; transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 10px 30px rgba(31, 36, 56, 0.05); }
+        .pc-version-card:hover { transform: translateY(-6px); box-shadow: 0 30px 60px rgba(31, 36, 56, 0.12); border-color: var(--pink); }
+        .pc-version-img { width: 100%; aspect-ratio: 16/9; background: linear-gradient(135deg, var(--navy-tint), var(--pink-soft));
+            border-bottom: 1px solid var(--line); display: flex; flex-direction: column; align-items: center;
+            justify-content: center; color: var(--ink-soft); text-align: center; padding: 2rem; }
+        .pc-version-img .label { font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 0.75rem; letter-spacing: 0.2em; color: var(--pink); margin-bottom: 0.5rem; }
+        .pc-version-img .icon { font-size: 3rem; margin: 1rem 0; opacity: 0.5; }
+        .pc-version-content { padding: 2.5rem; }
+        .live-badge { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.35rem 0.85rem;
+            background: var(--pink-soft); color: var(--pink-deep); border-radius: 100px;
+            font-family: 'Nunito', sans-serif; font-size: 0.75rem; font-weight: 800; letter-spacing: 0.1em; margin-bottom: 1.25rem; }
+        .live-dot { width: 8px; height: 8px; background: var(--pink); border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.3); } }
+        .pc-version-card h3 { font-size: var(--t-subtitle); font-weight: 800; margin-bottom: 1rem; color: var(--navy-deep); }
+        .pc-version-card p { color: var(--ink-soft); font-size: var(--t-body); line-height: 1.7; margin-bottom: 2rem; }
+        .btn-pc { display: inline-flex; align-items: center; gap: 0.5rem; padding: 1rem 2rem;
+            background: var(--pink); color: white; border-radius: 100px;
+            font-family: 'Pretendard Variable', sans-serif; font-weight: 700; font-size: 0.95rem; text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        .btn-pc:hover { background: var(--pink-deep); transform: translateX(3px); box-shadow: 0 12px 28px rgba(232, 73, 104, 0.4); }
+        /* Chapter 05 - OUR MISSION (네이비 다크) */
+        .ch-05 { background: var(--navy-deep); max-width: none; color: var(--paper-on-dark); padding: 10rem 2rem; position: relative; overflow: hidden; }
+        .ch-05::before { content: ''; position: absolute; top: -50%; left: -20%; width: 60%; height: 100%;
+            background: radial-gradient(circle, rgba(232, 73, 104, 0.1), transparent 60%); pointer-events: none; }
+        .ch-05::after { content: ''; position: absolute; bottom: -30%; right: -10%; width: 50%; height: 80%;
+            background: radial-gradient(circle, rgba(201, 168, 118, 0.06), transparent 60%); pointer-events: none; }
+        .ch-05-grain { position: absolute; inset: 0; opacity: 0.05; pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+        .ch-05-inner { max-width: 900px; margin: 0 auto; text-align: center; position: relative; z-index: 2; }
+        .mission-label { display: inline-flex; align-items: center; gap: 1rem; font-family: 'Nunito', sans-serif;
+            font-size: 0.85rem; font-weight: 700; letter-spacing: 0.4em; color: var(--pink-on-dark);
+            text-transform: uppercase; margin-bottom: 2.5rem; }
+        .mission-label::before, .mission-label::after { content: ''; width: 40px; height: 1px; background: var(--pink-on-dark); }
+        .mission-intro { font-size: var(--t-body); font-weight: 500; line-height: 1.6; color: var(--paper-on-dark-soft); margin-bottom: 1.5rem; }
+        .mission-keyword { font-size: clamp(2.8rem, 7vw, 5rem); font-weight: 800; line-height: 1.2; letter-spacing: -0.04em;
+            color: var(--paper-on-dark); margin: 1rem 0 3rem; position: relative; display: inline-block; }
+        .mission-keyword::after { content: ''; position: absolute; bottom: -0.5rem; left: 10%; right: 10%;
+            height: 4px; background: linear-gradient(90deg, transparent, var(--pink-on-dark), transparent); }
+        .mission-quote-box { margin-top: 3rem; padding: 3rem; background: rgba(238, 240, 247, 0.05);
+            border: 1px solid var(--line-on-dark); border-radius: 28px; backdrop-filter: blur(10px);
+            position: relative; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+        .mission-quote-box:hover { transform: translateY(-4px); border-color: rgba(255, 107, 134, 0.5); box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3); }
+        .mission-quote-mark { font-family: 'Nunito', sans-serif; font-size: 4rem; font-weight: 900; color: var(--pink-on-dark);
+            line-height: 1; opacity: 0.7; margin-bottom: 1rem; }
+        .mission-quote-text { font-size: var(--t-body); font-weight: 500; line-height: 1.7; color: var(--paper-on-dark); margin-bottom: 2rem; }
+        .mission-quote-text .pink-highlight { color: var(--pink-on-dark); font-weight: 700; }
+        .mission-quote-author { font-family: 'Nunito', sans-serif; font-size: 0.85rem; font-weight: 700;
+            letter-spacing: 0.2em; color: var(--pink-on-dark); text-transform: uppercase; }
+        /* Chapter 06 - VISION (네이비 다크) */
+        .ch-06 { background: var(--navy-main); color: var(--paper-on-dark); max-width: none; padding: 0;
+            position: relative; overflow: hidden; }
+        /* SLOT 06 — 섹션 전체 배경 이미지 */
+        .ch-06-bg-img {
+            position: absolute; inset: 0; z-index: 0;
+            background-image: url('story-ch06-bg.jpg');
+            background-size: cover; background-position: center;
+            opacity: 0.25; filter: brightness(0.6);
+        }
+        .ch-06-bg-overlay {
+            position: absolute; inset: 0; z-index: 1;
+            background: linear-gradient(
+                180deg,
+                rgba(34, 43, 77, 0.82) 0%,
+                rgba(34, 43, 77, 0.65) 50%,
+                rgba(34, 43, 77, 0.90) 100%
+            );
+        }
+        .ch-06-inner { max-width: 1000px; margin: 0 auto; position: relative; z-index: 2; text-align: center; padding: 10rem 2rem; }
+        .ch-06::before { content: ''; position: absolute; inset: 0;
+            background: repeating-linear-gradient(90deg, transparent 0px, transparent 80px, rgba(232, 73, 104, 0.025) 80px, rgba(232, 73, 104, 0.025) 81px);
+            pointer-events: none; }
+        .ch-06-inner { max-width: 1000px; margin: 0 auto; position: relative; z-index: 2; }
+        .ch-06-label { font-family: 'Nunito', sans-serif; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.4em;
+            color: var(--pink-on-dark); text-transform: uppercase; margin-bottom: 2.5rem; display: inline-flex; align-items: center; gap: 1rem; }
+        .ch-06-label::before, .ch-06-label::after { content: ''; width: 40px; height: 1px; background: var(--pink-on-dark); }
+        .vision-text { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; line-height: 1.3; letter-spacing: -0.03em;
+            margin: 2rem auto; color: var(--paper-on-dark); }
+        .vision-highlight { color: var(--pink-on-dark); position: relative; display: inline-block; }
+        .vision-highlight::after { content: ''; position: absolute; bottom: 0.1em; left: 0; width: 100%; height: 0.15em;
+            background: var(--pink-on-dark); opacity: 0.35; border-radius: 4px; }
+        .vision-subtext { font-size: var(--t-body); line-height: 1.8; color: var(--paper-on-dark-soft);
+            margin: 2rem auto; max-width: 700px; }
+        /* vision-img-wrap 제거 — SLOT 06은 섹션 배경으로 처리 */
+        /* CTA */
+        .cta-section { background: var(--navy-darkest); color: var(--paper-on-dark); max-width: none; padding: 9rem 2rem;
+            text-align: center; position: relative; overflow: hidden; }
+        .cta-bg { position: absolute; inset: 0;
+            background: radial-gradient(circle at 20% 30%, rgba(232, 73, 104, 0.18), transparent 50%),
+                        radial-gradient(circle at 80% 70%, rgba(201, 168, 118, 0.1), transparent 50%);
+            pointer-events: none; }
+        .cta-inner { position: relative; max-width: 800px; margin: 0 auto; }
+        .cta-eyebrow { font-family: 'Nunito', sans-serif; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.4em;
+            color: var(--pink-on-dark); text-transform: uppercase; margin-bottom: 1.5rem; display: inline-flex; align-items: center; gap: 1rem; }
+        .cta-eyebrow::before, .cta-eyebrow::after { content: ''; width: 40px; height: 1px; background: var(--pink-on-dark); }
+        .cta-title { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; line-height: 1.2; letter-spacing: -0.03em; margin-bottom: 1.5rem; }
+        .cta-sub { font-size: var(--t-body); color: var(--paper-on-dark-soft); margin-bottom: 3rem; }
+        .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 1.1rem 2.2rem;
+            font-family: 'Pretendard Variable', sans-serif; font-size: 1rem; font-weight: 700;
+            border-radius: 100px; text-decoration: none; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer; border: 2px solid transparent; position: relative; overflow: hidden; }
+        .btn-primary-pink { background: var(--pink); color: #fff; animation: subtlePulse 3s ease-in-out infinite; }
+        @keyframes subtlePulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(232, 73, 104, 0.45); } 50% { box-shadow: 0 0 0 12px rgba(232, 73, 104, 0); } }
+        .btn-primary-pink:hover { background: var(--pink-deep); transform: translateY(-2px); animation: none; box-shadow: 0 15px 30px rgba(232, 73, 104, 0.5); }
+        .btn-ghost { background: transparent; color: var(--paper-on-dark); border-color: rgba(238, 240, 247, 0.3); }
+        .btn-ghost:hover { background: rgba(238, 240, 247, 0.1); border-color: var(--paper-on-dark); transform: translateY(-2px); }
+        footer { background: var(--navy-darkest); color: rgba(238, 240, 247, 0.5); padding: 3rem 2rem;
+            text-align: center; font-size: 0.85rem; border-top: 1px solid var(--line-on-dark); }
+        footer a { color: var(--paper-on-dark-soft); text-decoration: none; margin: 0 0.75rem; transition: color 0.3s; }
+        footer a:hover { color: var(--pink-on-dark); }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @media (max-width: 768px) {
+            nav { padding: 1rem 1.25rem; }
+            .nav-links { gap: 1.25rem; font-size: 0.8rem; }
+            section { padding: 4.5rem 1.25rem; }
+            .ch-01, .ch-02, .ch-04, .ch-05, .ch-06, .cta-section { padding: 5rem 1.25rem; }
+            .ch-03-body { padding: 5rem 1.25rem; }
+            .ch01-layout { grid-template-columns: 1fr; gap: 2rem; }
+            .ch01-right { position: static; }
+            .ch01-right .img-placeholder { aspect-ratio: 4/3; min-height: 260px; }
+            .limits-grid { grid-template-columns: 1fr; }
+            .tech-grid { grid-template-columns: 1fr; }
+            .cursor-glow { display: none; }
+            .float-shape { display: none; }
+            .section-title { white-space: normal; font-size: clamp(1.5rem, 5vw, 2rem); }
+            .ch-03-impact { background-attachment: scroll; }
+            .question-q { font-size: 1.8rem; top: 1rem; right: 1.2rem; }
+            .question-text { padding-right: 2rem; }
+            .tl-step { padding-left: 3.75rem; }
+            .timeline::before { left: 19px; }
+            .tl-marker { width: 40px; height: 40px; font-size: 0.85rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="grain"></div>
+    <div class="cursor-glow" id="cursorGlow"></div>
+
+    <nav id="mainNav">
+        <a href="index.html" class="logo">꾸민</a>
+        <div class="nav-links">
+            <a href="index.html">홈</a>
+            <a href="story.html">스토리</a>
+            <a href="http://pf.kakao.com/_xljuEn">사전예약</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="float-shape shape-1"></div>
+        <div class="float-shape shape-2"></div>
+        <div class="float-shape shape-3"></div>
+        <div class="hero-tag">Brand Story</div>
+        <h1><span class="accent">현장</span>에서 시작된<br>이야기</h1>
+        <p class="hero-sub">인테리어 업체들이 먼저 쓰던 3D 기술이<br>모든 소비자의 손으로 옵니다.</p>
+        <div class="scroll-indicator">
+            <span>SCROLL</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- Chapter 01 — SLOT 01이 대제목과 같은 줄부터 시작 -->
+    <section class="ch-01">
+        <div class="ch-01-inner">
+            <div class="ch01-layout">
+                <div class="ch01-left">
+                    <div class="section-num reveal">CHAPTER 01</div>
+                    <h2 class="section-title reveal">공사 계획, 견적부터 어려운 이유</h2>
+                    <div class="ch01-headline reveal">
+                        <p>인테리어에서 가장 막막한 건 단연 <strong>"정확한 견적"</strong>.<br>가견적을 비교하는 건 사실상 무의미합니다.</p>
+                    </div>
+                    <p class="ch01-desc reveal">업체마다 다른 기준, 끝없이 붙는 추가금, 공사 후에야 드러나는 결과물. 소비자는 무엇을 기준으로 비교해야 할지조차 알 수 없는 구조 안에 놓여 있습니다.</p>
+                </div>
+                <div class="ch01-right reveal">
+                    <img src="story-slot01.png"
+                         alt="견적서를 들고 고민하는 소비자 일러스트"
+                         style="width:100%; height:100%; object-fit:contain; border-radius:20px; display:block;">
+                </div>
+            </div>
+            <div class="reason-cards">
+                <div class="reason-card reveal">
+                    <div class="reason-num">01</div>
+                    <div><h3>가격의 기준이 없음</h3><p>사용되는 자재, 정확한 공사의 범위, 시공 방식 등 비용이 높고 낮은 기준들이 너무 달라요.</p></div>
+                </div>
+                <div class="reason-card reveal">
+                    <div class="reason-num">02</div>
+                    <div><h3>예상 결과물 예측 불가</h3><p>인테리어는 공사가 끝나야 결과를 알 수 있으니, 잘못된 공사를 수정하는 건 대부분 불가능해져요.</p></div>
+                </div>
+                <div class="reason-card reveal">
+                    <div class="reason-num">03</div>
+                    <div><h3>숨은 비용</h3><p>내 공간인데, 내가 원하는 걸 선택하면 추가 비용이 생겨요.</p></div>
+                </div>
+            </div>
+            <div class="pain-quote reveal">
+                공사 계획 단계에서 정말 필요한 건 단 하나예요.<br>
+                <strong>"내가 원하는 결과물에 정확히 얼마가 드는지"</strong> 미리 아는 것.
+            </div>
+        </div>
+    </section>
+
+    <!-- Chapter 02 — 네이비 섹션 -->
+    <section class="ch-02">
+        <div class="ch-02-inner">
+            <div class="section-num reveal">CHAPTER 02</div>
+            <h2 class="section-title reveal">그동안 AI 인테리어 앱들의 한계</h2>
+            <p class="section-text reveal">요즘 AI 인테리어 앱을 검색해보면 대부분 해외 앱이에요.<br>디자인은 화려한데, 실제로 써보면 한국 사용자한테는 한계가 명확합니다.</p>
+            <!-- 이미지가 카드 그리드 배경에 흐릿하게 깔림 -->
+            <div class="limits-bg-wrap reveal">
+                <div class="limits-bg-img"></div>
+                <div class="limits-bg-overlay"></div>
+                <div class="limits-grid">
+                    <div class="limit-card">
+                        <div class="limit-icon">🏠</div>
+                        <h3>한국 아파트 도면이 안 맞음</h3>
+                        <p>기존 AI의 기술이 한국 디자인과 도면에 최적화 되어 있지 않아 도면 구조를 이해하지 못한 AI가 많아서 실질적으로 표현하지 못해요.</p>
+                    </div>
+                    <div class="limit-card">
+                        <div class="limit-icon">😕</div>
+                        <h3>결과물이 어색함</h3>
+                        <p>"실용적이지 못함", "쓸만한 게 없다" 같은 부정 리뷰가 많습니다.</p>
+                    </div>
+                    <div class="limit-card">
+                        <div class="limit-icon">💳</div>
+                        <h3>정기결제 강제</h3>
+                        <p>무료 체험만 잠깐 주고 정기결제로 유도하는 구조예요.</p>
+                    </div>
+                    <div class="limit-card">
+                        <div class="limit-icon">💸</div>
+                        <h3>비용 정보 없음</h3>
+                        <p>시안만 보여주고 "이걸 만들려면 얼마가 드는지"는 알려주지 않아요.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="key-message reveal">
+                <p>특히 <strong>비용 정보가 없는 게 가장 큰 문제</strong>예요.<br>예쁜 3D 시안 100장 봐도, 그게 우리집에서 얼마 들지 모르면 아무 의미가 없거든요.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chapter 03 - Fullscreen Impact -->
+    <section class="ch-03-impact" id="ch03">
+        <div class="ch-03-overlay"></div>
+        <div class="ch-03-content">
+            <div class="ch-03-label reveal">CHAPTER 03</div>
+            <p class="ch-03-bridge reveal">그래서, 우리는 만들었어요.</p>
+            <h2 class="ch-03-headline reveal">3D 디자인부터 보여주는<br>확실한 인테리어 견적앱</h2>
+            <div class="ch-03-brand reveal">꾸민</div>
+        </div>
+        <div class="ch-03-scroll">
+            <span>SCROLL</span>
+            <div class="ch-03-scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- Chapter 03 Body -->
+    <section class="ch-03-body">
+        <div class="ch-03-body-inner">
+            <p class="section-text reveal" style="margin-bottom: 1.5rem;">꾸민을 만든 회사는 조금 특별해요.</p>
+            <p class="section-text reveal" style="margin-bottom: 1.5rem;"><strong>대표가 직접 인테리어 현장에서 부딪히며 느낀 소비자의 고통</strong>으로 시작되었거든요.</p>
+            <p class="section-text reveal">수많은 현장에서 소비자들과 상담을 하며, 매번 같은 문제를 마주쳤어요.</p>
+
+            <!-- 두 개의 질문 분리 -->
+            <div class="question-block">
+                <div class="question-intro reveal">꾸민을 시작한 질문들</div>
+
+                <div class="question-item reveal">
+                    <div class="question-q">Q1<span class="question-q-mark">?</span></div>
+                    <p class="question-text">왜 고객들은 이 비싼 돈을 주고, 공사가 끝나봐야 결과를 알 수 있는 걸까?</p>
+                </div>
+
+                <div class="question-item reveal">
+                    <div class="question-q">Q2<span class="question-q-mark">?</span></div>
+                    <p class="question-text">왜 항상 두루뭉술한 견적으로 비교하고, 진짜 비용은 계약 후에 아는 걸까?</p>
+                </div>
+
+                <div class="question-conclusion reveal">
+                    <p>이 질문이 <span class="pink-accent">지금의 꾸민</span>을 만들었습니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chapter 04 -->
+    <section class="ch-04">
+        <div class="ch-04-inner">
+            <div class="section-num reveal">CHAPTER 04</div>
+            <h2 class="section-title reveal">돌아간 여정, 그리고 얻은 것들</h2>
+            <p class="section-text reveal">꾸민은 처음부터 지금의 모습이 아니었어요. 한 번의 방향 전환을 거치며 지금에 이르렀습니다.</p>
+
+            <div class="timeline">
+                <div class="tl-step reveal">
+                    <div class="tl-marker">01</div>
+                    <div class="tl-card">
+                        <div class="tl-stage">시작</div>
+                        <h3 class="tl-title">업체용 3D 기술에서 출발했어요</h3>
+                        <p class="tl-body">
+                            사실 꾸민의 첫 3D 디자인 기술은 <strong>국내 인테리어 업체가 주로 사용하도록</strong> 만들어졌어요.
+                        </p>
+                        <div class="tl-quote">
+                            "인테리어 업체가 고객에게 예상 3D 디자인을 계약 전 보여줄 수 있다면,<br><br>
+                            고객이 계약을 하지 않고도 가장 정확한 비용을 확인하고 계약할 수 있을 것이다."
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tl-step reveal">
+                    <div class="tl-marker">02</div>
+                    <div class="tl-card">
+                        <div class="tl-stage">시도, 그리고 벽</div>
+                        <h3 class="tl-title">생각보다 쉽지 않았어요</h3>
+                        <p class="tl-body">
+                            아무리 쉽게 제작된 3D 프로그램이었지만,<br><br>
+                            <strong>전국의 많은 업체가 3D를 사용하게 만드는 것보다, 고객이 더 3D를 원해야 업체도 움직인다</strong>는 것을 늦게서야 알게 되었죠.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="tl-step highlight reveal">
+                    <div class="tl-marker">03</div>
+                    <div class="tl-card">
+                        <div class="tl-stage">깨달음, 그리고 전환</div>
+                        <h3 class="tl-title">돌아온 길이, 가장 강력한 무기가 됐어요</h3>
+                        <p class="tl-body">
+                            첫 방향은 돌아가긴 했지만, 그 과정에서 저희는 많은 것을 얻었어요. 실제로 인테리어 업체들과 협업하며 만들어진 기술 자산들이, <strong>오히려 소비자용 앱의 가장 강력한 무기</strong>가 되었거든요.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="tech-section-title reveal">
+                <span class="small-tag">우리가 가진 것</span>
+                <h3>그 과정에서 얻은 6가지</h3>
+            </div>
+            <!-- SLOT 04: B2B→B2C 변환 이미지 -->
+            <div class="reveal" style="margin: 2.5rem 0; text-align: center;">
+                <img src="story-slot04.png"
+                     alt="B2B 업체용에서 B2C 소비자용으로 전환된 꾸민의 여정"
+                     style="max-width: 520px; width:100%; border-radius:20px; display:inline-block;">
+            </div>
+            <div class="tech-grid">
+                <div class="tech-card featured reveal">
+                    <div class="badge-shine">AWARD</div>
+                    <div class="tech-icon-wrap">🏆</div>
+                    <h4>CES 2025 / CES 2026<br>혁신상 연속 수상</h4>
+                    <p>세계 최대 기술 박람회에서 2년 연속 혁신상을 받은 기술력. 국제적으로 인정받은 3D 인테리어 솔루션입니다.</p>
+                </div>
+                <div class="tech-card featured reveal">
+                    <div class="badge-shine">PARTNER</div>
+                    <div class="tech-icon-wrap">🤝</div>
+                    <h4>SAMSUNG<br>파트너사 등록 기업</h4>
+                    <p>삼성과 공식 파트너십을 맺은 기업. 기술력과 안정성에 대한 대기업의 검증을 받았습니다.</p>
+                </div>
+                <div class="tech-card reveal">
+                    <div class="tech-icon-wrap">📐</div>
+                    <h4>실제 시공 가능한<br>3D 정확도</h4>
+                    <p>업체가 실무에서 사용하는 수준의 정확도. 화면 속 디자인이 그대로 시공 가능합니다.</p>
+                </div>
+                <div class="tech-card reveal">
+                    <div class="tech-icon-wrap">💰</div>
+                    <h4>실제 자재·제품 데이터<br>기반 비용 산출</h4>
+                    <p>짐작이 아닌 실제 자재와 제품 단가를 기반으로 정확한 비용을 보여줍니다.</p>
+                </div>
+                <div class="tech-card reveal">
+                    <div class="tech-icon-wrap">🏢</div>
+                    <h4>전국 아파트<br>3D 모델 데이터</h4>
+                    <p>주소만 입력하면 우리집 도면을 불러올 수 있도록, 전국 아파트 데이터를 확보했습니다.</p>
+                </div>
+                <div class="tech-card reveal">
+                    <div class="tech-icon-wrap">✨</div>
+                    <h4>AI 국내 스타일형<br>자동 디자인</h4>
+                    <p>한국인의 라이프스타일과 선호에 맞춰 학습된 AI가 자동으로 디자인을 제안합니다.</p>
+                </div>
+            </div>
+            <div class="credentials-img-area reveal">
+                <img src="story-slot05.png"
+                     alt="삼성 파트너사 인증 및 CES 2025·2026 혁신상"
+                     style="max-width:700px; width:100%; border-radius:20px; display:block; margin:0 auto;">
+            </div>
+            <div class="pc-version-card reveal">
+                <div class="pc-version-img" style="background:var(--paper-pure); padding:0; overflow:hidden;">
+                    <img src="story-slot07.png"
+                         alt="업체용 꾸민 PC 버전 화면"
+                         style="width:100%; height:100%; object-fit:cover; display:block; border-radius:0;">
+                </div>
+                <div class="pc-version-content">
+                    <div class="live-badge">
+                        <span class="live-dot"></span>
+                        LIVE NOW
+                    </div>
+                    <h3>업체용 꾸민, 지금 운영 중</h3>
+                    <p>국내 인테리어 업체들이 실무에서 직접 사용하고 있는 PC 버전이에요. 꾸민의 3D 정확도와 비용 산출이 어떻게 작동하는지 직접 확인해보세요.</p>
+                    <a href="https://ggumin.me" target="_blank" rel="noopener" class="btn-pc">업체 꾸민 구경하기 →</a>
+                </div>
+            </div>
+            <p class="section-text reveal" style="margin: 4rem auto 0; text-align: center;">이걸 PC에서 모바일로 옮기고, 일반 소비자도 쓸 수 있도록 만든 게 바로 <strong style="color: var(--pink);">꾸민</strong>이에요.</p>
+        </div>
+    </section>
+
+    <!-- Chapter 05 - OUR MISSION -->
+    <section class="ch-05">
+        <div class="ch-05-grain"></div>
+        <div class="ch-05-inner">
+            <div class="mission-label reveal">OUR MISSION</div>
+            <p class="mission-intro reveal">꾸민 팀이 가장 강조하는 한 가지는</p>
+            <div class="mission-keyword reveal">"투명함"</div>
+            <div class="mission-quote-box reveal">
+                <div class="mission-quote-mark">"</div>
+                <p class="mission-quote-text">소비자가 인테리어를 할 때<br>단순한 높고 낮은 견적이 아니라,<br><span class="pink-highlight">정확한 디자인과 제품에 따른 가격</span>을<br>투명하게 공개받을 수 있어야 합니다.</p>
+                <div class="mission-quote-author">— (주)마인스페이스</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chapter 06 - VISION (SLOT 06: 섹션 전체 배경) -->
+    <section class="ch-06">
+        <!-- SLOT 06: story-ch06-bg.jpg 파일을 같은 폴더에 업로드하면 배경으로 표시됩니다 -->
+        <div class="ch-06-bg-img"></div>
+        <div class="ch-06-bg-overlay"></div>
+        <div class="ch-06-inner">
+            <div class="ch-06-label reveal">CHAPTER 06 — VISION</div>
+            <p class="vision-text reveal"><span class="vision-highlight">투명한 인테리어</span>가<br>당연해지는 세상.</p>
+            <p class="vision-subtext reveal">우리는 인테리어가 더 이상 두려운 일이 되지 않기를 바랍니다.<br>누구나 자신의 집을 미리 보고, 정확한 비용을 알고,<br>확신 있는 결정을 내릴 수 있는 시대를 만들고 있습니다.</p>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="cta-bg"></div>
+        <div class="cta-inner">
+            <div class="cta-eyebrow">5월 29일 정식 출시</div>
+            <h2 class="cta-title">꾸민과 함께<br>투명한 인테리어를 경험해보세요.</h2>
+            <p class="cta-sub">사전예약하시면 컨설팅 50% 할인 + 공사비 10% 할인 쿠폰을 받으실 수 있어요.</p>
+            <div class="cta-buttons">
+                <a href="http://pf.kakao.com/_xljuEn" class="btn btn-primary-pink">사전예약 하기 →</a>
+                <a href="index.html" class="btn btn-ghost">꾸민 홈으로</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 마인스페이스(주) · 꾸민(ggumin)</p>
+        <p style="margin-top: 1rem; display: flex; justify-content: center; align-items: center; gap: 1.5rem;">
+            <a href="http://pf.kakao.com/_xljuEn">소비자 꾸민 사전예약</a>
+            <span style="opacity: 0.25;">|</span>
+            <a href="https://ggumin.me" target="_blank" rel="noopener">업체용 꾸민</a>
+            <span style="opacity: 0.25;">|</span>
+            <a href="story.html" style="color: var(--pink-on-dark);">브랜드 스토리 ← 현재 페이지</a>
+        </p>
+    </footer>
+
+    <script>
+        const cursorGlow = document.getElementById('cursorGlow');
+        document.addEventListener('mousemove', (e) => {
+            cursorGlow.style.left = e.clientX + 'px';
+            cursorGlow.style.top = e.clientY + 'px';
+        });
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            document.querySelectorAll('.float-shape').forEach((shape, i) => {
+                const speed = (i + 1) * 0.15;
+                shape.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+        const nav = document.getElementById('mainNav');
+        const darkSections = ['.ch-02', '.ch-03-impact', '.ch-05', '.ch-06', '.cta-section'];
+        window.addEventListener('scroll', () => {
+            const anyDarkVisible = darkSections.some(sel => {
+                const el = document.querySelector(sel);
+                if (!el) return false;
+                const rect = el.getBoundingClientRect();
+                return rect.top < 80 && rect.bottom > 80;
+            });
+            if (anyDarkVisible) nav.classList.add('on-dark');
+            else nav.classList.remove('on-dark');
+        });
+    </script>
+</body>
+</html>
