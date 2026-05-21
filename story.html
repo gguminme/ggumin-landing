@@ -180,10 +180,11 @@
         .ch-03-body { background: var(--paper); padding: 8rem 2rem; max-width: none; }
         .ch-03-body-inner { max-width: 1100px; margin: 0 auto; }
         .ch-03-body .section-text { font-size: clamp(1.1rem, 1.6vw, 1.25rem); }
-        /* Ch03 본문 2단 — 텍스트 + 목업 이미지 */
-        .ch-03-body-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        /* Ch03 본문 — 텍스트(위) + 목업 이미지(아래) 세로 스택 (수정 2) */
+        .ch-03-body-stack { display: flex; flex-direction: column; gap: 3.5rem; }
+        .ch-03-body-text { max-width: 760px; }
         .ch-03-mockup-wrap { display: flex; align-items: center; justify-content: center; }
-        .ch-03-mockup-wrap img { width: 100%; max-width: 480px; border-radius: 20px; display: block; }
+        .ch-03-mockup-wrap img { width: 100%; max-width: 620px; border-radius: 20px; display: block; }
         /* CHAPTER 03 질문 - 두 개로 분리 */
         .question-block { margin-top: 4rem; }
         .question-intro { font-family: 'Nunito', sans-serif; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.25em;
@@ -252,27 +253,31 @@
             font-family: 'Nunito', sans-serif; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em; border-radius: 6px; margin-bottom: 0.75rem; }
         .credentials-img-area { margin-top: 4rem; border-radius: 28px; overflow: hidden; text-align: center; background: var(--navy-tint); }
         .credentials-img-area .img-placeholder { max-width: 700px; aspect-ratio: 16/9; min-height: 0; margin: 0 auto; background: var(--paper-pure); }
-        .pc-version-card { margin-top: 4rem; background: var(--paper); border: 1px solid var(--line); border-radius: 32px;
-            overflow: hidden; transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 10px 30px rgba(31, 36, 56, 0.05); }
-        .pc-version-card:hover { transform: translateY(-6px); box-shadow: 0 30px 60px rgba(31, 36, 56, 0.12); border-color: var(--pink); }
-        .pc-version-img { width: 100%; aspect-ratio: 16/9; background: linear-gradient(135deg, var(--navy-tint), var(--pink-soft));
-            border-bottom: 1px solid var(--line); display: flex; flex-direction: column; align-items: center;
-            justify-content: center; color: var(--ink-soft); text-align: center; padding: 2rem; }
-        .pc-version-img .label { font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 0.75rem; letter-spacing: 0.2em; color: var(--pink); margin-bottom: 0.5rem; }
-        .pc-version-img .icon { font-size: 3rem; margin: 1rem 0; opacity: 0.5; }
-        .pc-version-content { padding: 2.5rem; }
         .live-badge { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.35rem 0.85rem;
             background: var(--pink-soft); color: var(--pink-deep); border-radius: 100px;
             font-family: 'Nunito', sans-serif; font-size: 0.75rem; font-weight: 800; letter-spacing: 0.1em; margin-bottom: 1.25rem; }
         .live-dot { width: 8px; height: 8px; background: var(--pink); border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
         @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.3); } }
-        .pc-version-card h3 { font-size: var(--t-subtitle); font-weight: 800; margin-bottom: 1rem; color: var(--navy-deep); }
-        .pc-version-card p { color: var(--ink-soft); font-size: var(--t-body); line-height: 1.7; margin-bottom: 2rem; }
-        .btn-pc { display: inline-flex; align-items: center; gap: 0.5rem; padding: 1rem 2rem;
-            background: var(--pink); color: white; border-radius: 100px;
-            font-family: 'Pretendard Variable', sans-serif; font-weight: 700; font-size: 0.95rem; text-decoration: none;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
-        .btn-pc:hover { background: var(--pink-deep); transform: translateX(3px); box-shadow: 0 12px 28px rgba(232, 73, 104, 0.4); }
+        /* 타임라인 03단계 — B2B→B2C 전환 이미지 (수정 3) */
+        .tl-transition-img { margin-top: 1.5rem; }
+        .tl-transition-img img { width: 100%; max-width: 360px; border-radius: 14px; display: block; }
+        /* 업체용 꾸민 — 와이드 배너 (수정 4) */
+        .pc-banner { display: flex; align-items: center; gap: 2rem; margin: 3rem 0 1rem;
+            background: var(--paper); border: 1px solid var(--line); border-radius: 24px;
+            padding: 1.25rem 1.75rem; text-decoration: none; overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 8px 24px rgba(31, 36, 56, 0.05); }
+        .pc-banner:hover { transform: translateY(-3px); border-color: var(--pink); box-shadow: 0 20px 40px rgba(31, 36, 56, 0.12); }
+        .pc-banner-img { flex-shrink: 0; width: 200px; height: 110px; border-radius: 14px; overflow: hidden;
+            background: var(--navy-tint); }
+        .pc-banner-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .pc-banner-content { flex: 1; min-width: 0; }
+        .pc-banner-content h3 { font-size: 1.2rem; font-weight: 800; color: var(--navy-deep);
+            margin: 0.5rem 0 0.35rem; }
+        .pc-banner-content p { font-size: 0.95rem; color: var(--ink-soft); line-height: 1.55; margin: 0; }
+        .pc-banner-cta { flex-shrink: 0; padding: 0.85rem 1.5rem; background: var(--pink); color: #fff;
+            border-radius: 100px; font-family: 'Pretendard Variable', sans-serif; font-weight: 700;
+            font-size: 0.9rem; white-space: nowrap; transition: background 0.4s; }
+        .pc-banner:hover .pc-banner-cta { background: var(--pink-deep); }
         /* Chapter 05 - OUR MISSION (네이비 다크) */
         .ch-05 { background: var(--navy-deep); max-width: none; color: var(--paper-on-dark); padding: 10rem 2rem; position: relative; overflow: hidden; }
         .ch-05::before { content: ''; position: absolute; top: -50%; left: -20%; width: 60%; height: 100%;
@@ -291,15 +296,11 @@
             color: var(--paper-on-dark); margin: 1rem 0 3rem; position: relative; display: inline-block; }
         .mission-keyword::after { content: ''; position: absolute; bottom: -0.5rem; left: 10%; right: 10%;
             height: 4px; background: linear-gradient(90deg, transparent, var(--pink-on-dark), transparent); }
-        .mission-quote-box { margin-top: 3rem; padding: 3rem; background: rgba(238, 240, 247, 0.05);
-            border: 1px solid var(--line-on-dark); border-radius: 28px; backdrop-filter: blur(10px);
-            position: relative; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
-        .mission-quote-box:hover { transform: translateY(-4px); border-color: rgba(255, 107, 134, 0.5); box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3); }
-        .mission-quote-mark { font-family: 'Nunito', sans-serif; font-size: 4rem; font-weight: 900; color: var(--pink-on-dark);
-            line-height: 1; opacity: 0.7; margin-bottom: 1rem; }
-        .mission-quote-text { font-size: var(--t-body); font-weight: 500; line-height: 1.7; color: var(--paper-on-dark); margin-bottom: 2rem; }
-        .mission-quote-text .pink-highlight { color: var(--pink-on-dark); font-weight: 700; }
-        .mission-quote-author { font-family: 'Nunito', sans-serif; font-size: 0.85rem; font-weight: 700;
+        /* Chapter 05 — 박스 없는 미션 문장 (수정 5) */
+        .mission-statement { font-size: clamp(1.3rem, 2.6vw, 1.75rem); font-weight: 600; line-height: 1.7;
+            color: var(--paper-on-dark); max-width: 760px; margin: 3rem auto 1.5rem; }
+        .mission-statement .pink-highlight { color: var(--pink-on-dark); font-weight: 800; }
+        .mission-statement-author { font-family: 'Nunito', sans-serif; font-size: 0.85rem; font-weight: 700;
             letter-spacing: 0.2em; color: var(--pink-on-dark); text-transform: uppercase; }
         /* Chapter 06 - VISION (네이비 다크) */
         .ch-06 { background: #ffffff; color: var(--navy-deep); max-width: none; padding: 0;
@@ -343,9 +344,6 @@
                         radial-gradient(circle at 80% 70%, rgba(201, 168, 118, 0.1), transparent 50%);
             pointer-events: none; }
         .cta-inner { position: relative; max-width: 800px; margin: 0 auto; }
-        .cta-eyebrow { font-family: 'Nunito', sans-serif; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.4em;
-            color: var(--pink-on-dark); text-transform: uppercase; margin-bottom: 1.5rem; display: inline-flex; align-items: center; gap: 1rem; }
-        .cta-eyebrow::before, .cta-eyebrow::after { content: ''; width: 40px; height: 1px; background: var(--pink-on-dark); }
         .cta-title { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; line-height: 1.2; letter-spacing: -0.03em; margin-bottom: 1.5rem; }
         .cta-sub { font-size: var(--t-body); color: var(--paper-on-dark-soft); margin-bottom: 3rem; }
         .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
@@ -369,7 +367,6 @@
             section { padding: 4.5rem 1.25rem; }
             .ch-01, .ch-02, .ch-04, .ch-05, .ch-06, .cta-section { padding: 5rem 1.25rem; }
             .ch-03-body { padding: 5rem 1.25rem; }
-            .ch-03-body-grid { grid-template-columns: 1fr; gap: 2rem; }
             .ch01-layout { grid-template-columns: 1fr; gap: 2rem; }
             .ch01-right { position: static; }
             .ch01-right .img-placeholder { aspect-ratio: 4/3; min-height: 260px; }
@@ -384,6 +381,9 @@
             .tl-step { padding-left: 3.75rem; }
             .timeline::before { left: 19px; }
             .tl-marker { width: 40px; height: 40px; font-size: 0.85rem; }
+            .pc-banner { flex-direction: column; align-items: stretch; text-align: center; gap: 1.25rem; padding: 1.25rem; }
+            .pc-banner-img { width: 100%; height: 160px; }
+            .pc-banner-cta { align-self: center; }
         }
     </style>
 </head>
@@ -418,12 +418,12 @@
         <div class="ch-01-inner">
             <div class="ch01-layout">
                 <div class="ch01-left">
-                    <div class="section-num reveal">CHAPTER 01</div>
+                    <div class="section-num reveal">THE PROBLEM</div>
                     <h2 class="section-title reveal">공사 계획, 견적부터 어려운 이유</h2>
                     <div class="ch01-headline reveal">
                         <p>인테리어에서 가장 막막한 건 단연 <strong>"정확한 견적"</strong>.<br>가견적을 비교하는 건 사실상 무의미합니다.</p>
                     </div>
-                    <p class="ch01-desc reveal">업체마다 다른 기준, 끝없이 붙는 추가금, 공사 후에야 드러나는 결과물. 소비자는 무엇을 기준으로 비교해야 할지조차 알 수 없는 구조 안에 놓여 있습니다.</p>
+                    <p class="ch01-desc reveal">업체마다 다른 기준, 끝없이 붙는 추가금, 공사 후에야 드러나는 결과물.<br><br>소비자는 무엇을 기준으로 비교해야 할지조차 알 수 없는 구조 안에 놓여 있습니다.</p>
                 </div>
                 <div class="ch01-right reveal">
                     <img src="story-slot01.png"
@@ -455,7 +455,7 @@
     <!-- Chapter 02 — 네이비 섹션 -->
     <section class="ch-02">
         <div class="ch-02-inner">
-            <div class="section-num reveal">CHAPTER 02</div>
+            <div class="section-num reveal">THE LIMITS</div>
             <h2 class="section-title reveal">그동안 AI 인테리어 앱들의 한계</h2>
             <p class="section-text reveal">요즘 AI 인테리어 앱을 검색해보면 대부분 해외 앱이에요.<br>디자인은 화려한데, 실제로 써보면 한국 사용자한테는 한계가 명확합니다.</p>
             <!-- 이미지가 카드 그리드 배경에 흐릿하게 깔림 -->
@@ -495,7 +495,7 @@
     <section class="ch-03-impact" id="ch03">
         <div class="ch-03-overlay"></div>
         <div class="ch-03-content">
-            <div class="ch-03-label reveal">CHAPTER 03</div>
+            <div class="ch-03-label reveal">OUR SOLUTION</div>
             <p class="ch-03-bridge reveal">그래서, 우리는 만들었어요.</p>
             <h2 class="ch-03-headline reveal">3D 디자인부터 보여주는<br>확실한 인테리어 견적앱</h2>
             <div class="ch-03-brand reveal">꾸민</div>
@@ -509,9 +509,9 @@
     <!-- Chapter 03 Body -->
     <section class="ch-03-body">
         <div class="ch-03-body-inner">
-            <div class="ch-03-body-grid">
-                <!-- 좌측: 텍스트 + 질문 -->
-                <div>
+            <div class="ch-03-body-stack">
+                <!-- 상단: 텍스트 + 질문 (전체 너비) -->
+                <div class="ch-03-body-text">
                     <p class="section-text reveal" style="margin-bottom: 1.5rem;">꾸민을 만든 회사는 조금 특별해요.</p>
                     <p class="section-text reveal" style="margin-bottom: 1.5rem;"><strong>대표가 직접 인테리어 현장에서 부딪히며 느낀 소비자의 고통</strong>으로 시작되었거든요.</p>
                     <p class="section-text reveal">수많은 현장에서 소비자들과 상담을 하며, 매번 같은 문제를 마주쳤어요.</p>
@@ -536,7 +536,7 @@
                     </div>
                 </div>
 
-                <!-- 우측: 서비스 목업 이미지 -->
+                <!-- 하단: 서비스 목업 이미지 -->
                 <div class="ch-03-mockup-wrap reveal">
                     <img src="story-slot03-mockup.png"
                          alt="꾸민 앱 서비스 화면 목업 — 맞춤 디자인과 예상 견적 화면">
@@ -548,7 +548,7 @@
     <!-- Chapter 04 -->
     <section class="ch-04">
         <div class="ch-04-inner">
-            <div class="section-num reveal">CHAPTER 04</div>
+            <div class="section-num reveal">OUR JOURNEY</div>
             <h2 class="section-title reveal">돌아간 여정, 그리고 얻은 것들</h2>
             <p class="section-text reveal">꾸민은 처음부터 지금의 모습이 아니었어요. 한 번의 방향 전환을 거치며 지금에 이르렀습니다.</p>
 
@@ -588,18 +588,33 @@
                         <p class="tl-body">
                             첫 방향은 돌아가긴 했지만, 그 과정에서 저희는 많은 것을 얻었어요. 실제로 인테리어 업체들과 협업하며 만들어진 기술 자산들이, <strong>오히려 소비자용 앱의 가장 강력한 무기</strong>가 되었거든요.
                         </p>
+                        <div class="tl-transition-img">
+                            <img src="story-slot04.png"
+                                 alt="B2B 업체용에서 B2C 소비자용으로 전환된 꾸민의 여정">
+                        </div>
                     </div>
                 </div>
             </div>
+
+            <!-- 업체용 꾸민 — 와이드 배너 (수정 4) -->
+            <a href="https://ggumin.me" target="_blank" rel="noopener" class="pc-banner reveal">
+                <div class="pc-banner-img">
+                    <img src="story-slot07.png" alt="업체용 꾸민 PC 버전 화면">
+                </div>
+                <div class="pc-banner-content">
+                    <div class="live-badge">
+                        <span class="live-dot"></span>
+                        LIVE NOW
+                    </div>
+                    <h3>업체용 꾸민, 지금 운영 중</h3>
+                    <p>국내 인테리어 업체들이 실무에서 직접 사용하고 있는 PC 버전이에요.</p>
+                </div>
+                <div class="pc-banner-cta">업체 꾸민 구경하기 →</div>
+            </a>
+
             <div class="tech-section-title reveal">
                 <span class="small-tag">우리가 가진 것</span>
                 <h3>그 과정에서 얻은 6가지</h3>
-            </div>
-            <!-- SLOT 04: B2B→B2C 변환 이미지 -->
-            <div class="reveal" style="margin: 2.5rem 0; text-align: center;">
-                <img src="story-slot04.png"
-                     alt="B2B 업체용에서 B2C 소비자용으로 전환된 꾸민의 여정"
-                     style="max-width: 400px; width:80%; border-radius:20px; display:inline-block;">
             </div>
             <div class="tech-grid">
                 <div class="tech-card featured reveal">
@@ -640,22 +655,6 @@
                      alt="삼성 파트너사 인증 및 CES 2025·2026 혁신상"
                      style="width:100%; display:block; border-radius:28px;">
             </div>
-            <div class="pc-version-card reveal">
-                <div class="pc-version-img" style="background:var(--paper-pure); padding:0; overflow:hidden;">
-                    <img src="story-slot07.png"
-                         alt="업체용 꾸민 PC 버전 화면"
-                         style="width:100%; height:100%; object-fit:cover; display:block; border-radius:0;">
-                </div>
-                <div class="pc-version-content">
-                    <div class="live-badge">
-                        <span class="live-dot"></span>
-                        LIVE NOW
-                    </div>
-                    <h3>업체용 꾸민, 지금 운영 중</h3>
-                    <p>국내 인테리어 업체들이 실무에서 직접 사용하고 있는 PC 버전이에요. 꾸민의 3D 정확도와 비용 산출이 어떻게 작동하는지 직접 확인해보세요.</p>
-                    <a href="https://ggumin.me" target="_blank" rel="noopener" class="btn-pc">업체 꾸민 구경하기 →</a>
-                </div>
-            </div>
             <p class="section-text reveal" style="margin: 4rem auto 0; text-align: center;">이걸 PC에서 모바일로 옮기고, 일반 소비자도 쓸 수 있도록 만든 게 바로 <strong style="color: var(--pink);">꾸민</strong>이에요.</p>
         </div>
     </section>
@@ -667,11 +666,8 @@
             <div class="mission-label reveal">OUR MISSION</div>
             <p class="mission-intro reveal">꾸민 팀이 가장 강조하는 한 가지는</p>
             <div class="mission-keyword reveal">"투명함"</div>
-            <div class="mission-quote-box reveal">
-                <div class="mission-quote-mark">"</div>
-                <p class="mission-quote-text">소비자가 인테리어를 할 때<br>단순한 높고 낮은 견적이 아니라,<br><span class="pink-highlight">정확한 디자인과 제품에 따른 가격</span>을<br>투명하게 공개받을 수 있어야 합니다.</p>
-                <div class="mission-quote-author">— (주)마인스페이스</div>
-            </div>
+            <p class="mission-statement reveal">소비자가 인테리어를 할 때 단순한 높고 낮은 견적이 아니라,<br><span class="pink-highlight">정확한 디자인과 제품에 따른 가격</span>을 투명하게 공개받을 수 있어야 합니다.</p>
+            <div class="mission-statement-author reveal">— (주)마인스페이스</div>
         </div>
     </section>
 
@@ -681,7 +677,7 @@
         <div class="ch-06-bg-img"></div>
         <div class="ch-06-bg-overlay"></div>
         <div class="ch-06-inner">
-            <div class="ch-06-label reveal">CHAPTER 06 — VISION</div>
+            <div class="ch-06-label reveal">OUR VISION</div>
             <p class="vision-text reveal"><span class="vision-highlight">투명한 인테리어</span>가<br>당연해지는 세상.</p>
             <p class="vision-subtext reveal">우리는 인테리어가 더 이상 두려운 일이 되지 않기를 바랍니다.<br>누구나 자신의 집을 미리 보고, 정확한 비용을 알고,<br>확신 있는 결정을 내릴 수 있는 시대를 만들고 있습니다.</p>
         </div>
@@ -691,7 +687,6 @@
     <section class="cta-section">
         <div class="cta-bg"></div>
         <div class="cta-inner">
-            <div class="cta-eyebrow">5월 29일 정식 출시</div>
             <h2 class="cta-title">꾸민과 함께<br>투명한 인테리어를 경험해보세요.</h2>
             <p class="cta-sub">사전예약하시면 컨설팅 50% 할인 + 공사비 10% 할인 쿠폰을 받으실 수 있어요.</p>
             <div class="cta-buttons">
