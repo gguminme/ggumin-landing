@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>꾸민 — 사전예약 | AI 3D 인테리어 앱</title>
+<title>꾸민 — 다운로드 | AI 3D 인테리어 앱</title>
 <!-- ══ Google Analytics 4 ══ -->
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQVKW1QK4D"></script>
@@ -868,6 +868,61 @@ nav.scrolled { background: rgba(10,10,10,0.9); backdrop-filter: blur(14px); bord
 }
 
 /* ════════════════════════════════════
+   CTA STORE BUTTONS (다운로드)
+════════════════════════════════════ */
+.cta-store-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+  margin: 2.2rem auto 1.4rem;
+}
+.cta-store-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  background: #fff;
+  color: #111010;
+  border-radius: 14px;
+  padding: 0.85rem 1.5rem;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 6px 22px rgba(0,0,0,0.25);
+}
+.cta-store-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+}
+.cta-store-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--primary);
+}
+.cta-store-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.15;
+}
+.cta-store-small {
+  font-size: 0.62rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  opacity: 0.7;
+}
+.cta-store-big {
+  font-family: var(--font-en);
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+@media (max-width: 480px) {
+  .cta-store-wrap { flex-direction: column; gap: 0.7rem; }
+  .cta-store-btn { width: 100%; max-width: 280px; justify-content: center; }
+}
+
+/* ════════════════════════════════════
    REVIEW SECTION
 ════════════════════════════════════ */
 #reviews {
@@ -1140,7 +1195,7 @@ nav.scrolled { background: rgba(10,10,10,0.9); backdrop-filter: blur(14px); bord
     <li><a href="#offer">Features</a></li>
     <li><a href="story.html">Brand Story</a></li>
   </ul>
-  <a href="http://pf.kakao.com/_xljuEn" target="_blank" class="nav-cta">출시 알림 받기</a>
+  <a href="#" onclick="goToStore('nav_download_btn');return false;" class="nav-cta">앱 다운로드</a>
 </nav>
 
 <!-- ══ HERO ══ -->
@@ -1153,7 +1208,7 @@ nav.scrolled { background: rgba(10,10,10,0.9); backdrop-filter: blur(14px); bord
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <div class="hero-badge reveal-wrap delay-1">
-      <span class="reveal-inner"><span class="badge-dot"></span>사전예약 진행 중 · 한정 혜택 제공</span>
+      <span class="reveal-inner"><span class="badge-dot"></span>iOS · Android 출시 완료 · 무료 설치</span>
     </div>
     <h1 class="hero-headline">
       <span class="reveal-wrap delay-2"><span class="reveal-inner">인테리어가 두려운 건,</span></span>
@@ -1165,14 +1220,14 @@ nav.scrolled { background: rgba(10,10,10,0.9); backdrop-filter: blur(14px); bord
     <p class="hero-sub2 reveal-wrap delay-5">
       <span class="reveal-inner">내 집에 딱 맞는 인테리어와 정확한 비용을 눈으로 확인하고 결정하세요.</span>
     </p>
-    <a href="http://pf.kakao.com/_xljuEn" target="_blank" class="hero-cta" onclick="gtag('event','cta_click',{event_category:'CTA',event_label:'hero_launch_btn',section:'hero'})">출시 알림 받기 <span class="cta-arrow">→</span></a>
+    <a href="#" onclick="goToStore('hero_download_btn');return false;" class="hero-cta">지금 다운로드 <span class="cta-arrow">→</span></a>
   </div>
   <div class="scroll-hint">
     <div class="scroll-line"></div>
     <span class="scroll-text">Scroll</span>
   </div>
   <div class="hero-trust">
-    <div class="trust-item"><span>✦</span><span>사전예약자 <span class="num">한정</span> 혜택 제공</span></div>
+    <div class="trust-item"><span>✦</span><span>iOS · Android <span class="num">무료</span> 설치</span></div>
     <div class="trust-item"><span>✦</span><span>인테리어 비용 <span class="num">16%</span> 평균 절감</span></div>
     <div class="trust-item"><span>✦</span><span>3D 디자인 <span class="num">실시간</span> 확인</span></div>
   </div>
@@ -1241,7 +1296,7 @@ nav.scrolled { background: rgba(10,10,10,0.9); backdrop-filter: blur(14px); bord
     </div>
     <div class="conclusion-bar fade-up">
       <p class="conclusion-text">공사 전에 인테리어를 확인하고 시작할 수 있게<br><strong><span class="pink">꾸민</span>에서 직접 경험해 보세요.</strong></p>
-      <a href="http://pf.kakao.com/_xljuEn" target="_blank" class="conclusion-cta" onclick="gtag('event','cta_click',{event_category:'CTA',event_label:'agitation_kakao_btn',section:'agitation'})">출시 알림 받기 →</a>
+      <a href="#" onclick="goToStore('agitation_download_btn');return false;" class="conclusion-cta">앱 다운로드하기 →</a>
     </div>
   </div>
 </section>
@@ -1332,8 +1387,8 @@ nav.scrolled { background: rgba(10,10,10,0.9); backdrop-filter: blur(14px); bord
     </div>
 
     <div class="webgl-cta-row fade-up">
-      <a href="http://pf.kakao.com/_xljuEn" target="_blank" class="webgl-cta-main" onclick="gtag('event','cta_click',{event_category:'CTA',event_label:'webgl_launch_btn',section:'webgl'})">출시 알림 받기 <span class="webgl-cta-arrow">→</span></a>
-      <span class="webgl-cta-sub">2026년 5월 말 출시 예정</span>
+      <a href="#" onclick="goToStore('webgl_download_btn');return false;" class="webgl-cta-main">앱 다운로드하기 <span class="webgl-cta-arrow">→</span></a>
+      <span class="webgl-cta-sub">지금 바로 설치 가능</span>
     </div>
 
   </div>
@@ -1570,63 +1625,6 @@ nav.scrolled { background: rgba(10,10,10,0.9); backdrop-filter: blur(14px); bord
   </div>
 </section>
 
-<!-- ══ NARROWING (런칭이벤트) ══ -->
-<section id="narrowing">
-  <div class="narrowing-inner">
-
-    <div class="narrowing-header fade-up">
-      <div class="sec-label" style="background:rgba(253,74,102,0.12); color:var(--primary); border-color:rgba(253,74,102,0.3)">🎁 사전예약 특별 혜택</div>
-      <h2 class="narrowing-title">사전예약자에게만<br><span class="n-accent">특별한 혜택</span>을 드려요</h2>
-      <p class="narrowing-sub">사전예약 기간에만 제공되는 한정 혜택이에요.<br>이후에는 동일한 조건으로 받을 수 없어요.</p>
-    </div>
-
-    <div class="n-cards fade-up">
-
-      <div class="n-card">
-        <div class="n-card-top">
-          <span class="n-badge">이벤트 01</span>
-          <span class="n-tag">사전예약자 한정</span>
-        </div>
-        <div class="n-icon">🏠</div>
-        <h3 class="n-card-title">오프라인 인테리어<br>전문 컨설팅 50% 할인</h3>
-        <p class="n-card-desc">구조 맞춤 인테리어 전문 디자이너와 1:1로 직접 만나 상담을 진행해 드려요. 내 집 구조에 딱 맞는 방향을 전문가에게 직접 들을 수 있는 기회예요.</p>
-        <div class="n-price-row">
-          <span class="n-price-original">400,000원</span>
-          <span class="n-price-arrow">→</span>
-          <span class="n-price-sale">200,000원</span>
-          <span class="n-price-tag">50% OFF</span>
-        </div>
-      </div>
-
-      <div class="n-card">
-        <div class="n-card-top">
-          <span class="n-badge">이벤트 02</span>
-          <span class="n-tag">사전예약 전용</span>
-        </div>
-        <div class="n-icon">🔨</div>
-        <h3 class="n-card-title">첫 공사 시공비<br>10% 할인 쿠폰</h3>
-        <p class="n-card-desc">꾸민을 통해 첫 인테리어 공사를 진행하는 고객에게 시공비 10% 할인 쿠폰을 드려요. 공사 규모가 클수록 더 큰 혜택이 돌아와요.</p>
-        <div class="n-price-row">
-          <span class="n-price-sale" style="font-size:1.6rem">시공비 10%</span>
-          <span class="n-price-tag">할인 쿠폰</span>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="n-cta-wrap fade-up">
-      <div class="n-cta-box">
-        <div class="n-cta-left">
-          <p class="n-cta-label">사전예약 혜택 받기</p>
-          <p class="n-cta-sub">사전예약 기간 이후에는 동일 조건으로 제공되지 않아요</p>
-        </div>
-        <a href="http://pf.kakao.com/_xljuEn" target="_blank" class="n-cta-btn" onclick="gtag('event','cta_click',{event_category:'CTA',event_label:'narrowing_launch_btn',section:'narrowing'})">출시 알림 받기 →</a>
-      </div>
-    </div>
-
-  </div>
-</section>
-
 <!-- ══ CTA ══ -->
 <section id="cta">
   <div class="cta-bg">
@@ -1636,34 +1634,23 @@ nav.scrolled { background: rgba(10,10,10,0.9); backdrop-filter: blur(14px); bord
 
   <div class="cta-inner">
     <div class="cta-content fade-up">
-      <div class="sec-label" style="background:rgba(253,74,102,0.15); color:#ffaab7; border-color:rgba(253,74,102,0.35)">✦ 2026년 5월 말 런칭 예정</div>
+      <div class="sec-label" style="background:rgba(253,74,102,0.15); color:#ffaab7; border-color:rgba(253,74,102,0.35)">✦ 지금 다운로드 가능</div>
       <h2 class="cta-title">보이는 인테리어로<br><span class="cta-accent">안심하고</span> 시작해보세요.</h2>
-      <p class="cta-sub">꾸민이 곧 출시돼요. 출시와 동시에 바로 시작할 수 있어요.</p>
+      <p class="cta-sub">꾸민이 출시됐어요. 지금 바로 다운로드하고 시작할 수 있어요.</p>
 
-      <!-- 카운트다운 -->
-      <div class="countdown-wrap">
-        <div class="countdown-item">
-          <span class="countdown-num" id="cd-days">--</span>
-          <span class="countdown-label">일</span>
-        </div>
-        <span class="countdown-sep">:</span>
-        <div class="countdown-item">
-          <span class="countdown-num" id="cd-hours">--</span>
-          <span class="countdown-label">시간</span>
-        </div>
-        <span class="countdown-sep">:</span>
-        <div class="countdown-item">
-          <span class="countdown-num" id="cd-mins">--</span>
-          <span class="countdown-label">분</span>
-        </div>
-        <span class="countdown-sep">:</span>
-        <div class="countdown-item">
-          <span class="countdown-num" id="cd-secs">--</span>
-          <span class="countdown-label">초</span>
-        </div>
+      <!-- 다운로드 버튼 -->
+      <div class="cta-store-wrap">
+        <a href="https://apps.apple.com/kr/app/%EA%BE%B8%EB%AF%BC/id6756961412" target="_blank" class="cta-store-btn" onclick="try{gtag('event','app_download',{event_category:'CTA',event_label:'cta_app_store',store:'app_store'})}catch(e){}">
+          <span class="cta-store-icon"></span>
+          <span class="cta-store-text"><span class="cta-store-small">Download on the</span><span class="cta-store-big">App Store</span></span>
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=com.mainspace.gguminapp&hl=ko" target="_blank" class="cta-store-btn" onclick="try{gtag('event','app_download',{event_category:'CTA',event_label:'cta_google_play',store:'google_play'})}catch(e){}">
+          <span class="cta-store-icon">▶</span>
+          <span class="cta-store-text"><span class="cta-store-small">GET IT ON</span><span class="cta-store-big">Google Play</span></span>
+        </a>
       </div>
 
-      <p class="cta-note">출시 즉시 앱스토어 · 구글플레이에서 무료로 설치할 수 있어요</p>
+      <p class="cta-note">앱스토어 · 구글플레이에서 무료로 설치하세요</p>
     </div>
   </div>
 </section>
@@ -1682,21 +1669,21 @@ nav.scrolled { background: rgba(10,10,10,0.9); backdrop-filter: blur(14px); bord
 
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">
-          꾸민 앱은 언제 출시되나요?
+          꾸민 앱은 어디서 다운로드하나요?
           <span class="faq-icon">+</span>
         </button>
         <div class="faq-a">
-          <div class="faq-a-inner"><span class="highlight">2026년 5월 말 출시</span>를 목표로 개발 중이에요. 앱스토어(iOS)와 구글플레이(Android) 모두 동시 출시 예정이에요. 정확한 출시일은 카카오 채널을 통해 가장 먼저 안내드릴게요.</div>
+          <div class="faq-a-inner"><span class="highlight">앱스토어(iOS)와 구글플레이(Android)</span>에서 모두 다운로드할 수 있어요. 페이지의 '앱 다운로드' 버튼을 누르면 사용 중인 기기에 맞는 스토어로 바로 연결돼요. <a href="https://apps.apple.com/kr/app/%EA%BE%B8%EB%AF%BC/id6756961412" target="_blank" style="color:var(--primary);font-weight:600;">→ App Store</a> · <a href="https://play.google.com/store/apps/details?id=com.mainspace.gguminapp&hl=ko" target="_blank" style="color:var(--primary);font-weight:600;">→ Google Play</a></div>
         </div>
       </div>
 
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">
-          출시 알림은 어떻게 받을 수 있나요?
+          새로운 소식은 어디서 받을 수 있나요?
           <span class="faq-icon">+</span>
         </button>
         <div class="faq-a">
-          <div class="faq-a-inner">카카오 채널 <strong>'꾸민'</strong>을 친구 추가하시면 출시 즉시 알림을 받을 수 있어요. 출시 알림 외에도 런칭 기념 혜택, 업데이트 소식을 가장 먼저 전달해 드려요. <a href="http://pf.kakao.com/_xljuEn" target="_blank" style="color:var(--primary);font-weight:600;">→ 카카오 채널 바로가기</a></div>
+          <div class="faq-a-inner">카카오 채널 <strong>'꾸민'</strong>을 친구 추가하시면 업데이트 소식과 다양한 혜택을 가장 먼저 받아볼 수 있어요. <a href="http://pf.kakao.com/_xljuEn" target="_blank" style="color:var(--primary);font-weight:600;">→ 카카오 채널 바로가기</a></div>
         </div>
       </div>
 
@@ -1765,7 +1752,7 @@ nav.scrolled { background: rgba(10,10,10,0.9); backdrop-filter: blur(14px); bord
     <!-- FAQ 하단 CTA -->
     <div class="faq-cta-wrap fade-up">
       <p class="faq-cta-text">아직 궁금한 점이 있으신가요?</p>
-      <a href="http://pf.kakao.com/_xljuEn" target="_blank" class="faq-cta-btn" onclick="gtag('event','cta_click',{event_category:'CTA',event_label:'faq_kakao_btn',section:'faq'})">출시 알림 받기 →</a>
+      <a href="http://pf.kakao.com/_xljuEn" target="_blank" class="faq-cta-btn" onclick="gtag('event','cta_click',{event_category:'CTA',event_label:'faq_kakao_inquiry',section:'faq'})">카카오 채널로 문의하기 →</a>
     </div>
 
   </div>
@@ -1906,32 +1893,20 @@ nav.scrolled { background: rgba(10,10,10,0.9); backdrop-filter: blur(14px); bord
 </script>
 
 <script>
-  /* 카운트다운 타이머 — 2025년 5월 31일 자정 기준 */
-  (function() {
-    const launchDate = new Date('2026-05-31T00:00:00+09:00');
-    function pad(n) { return String(n).padStart(2, '0'); }
-    function tick() {
-      const now = new Date();
-      const diff = launchDate - now;
-      if (diff <= 0) {
-        document.getElementById('cd-days').textContent = '00';
-        document.getElementById('cd-hours').textContent = '00';
-        document.getElementById('cd-mins').textContent = '00';
-        document.getElementById('cd-secs').textContent = '00';
-        return;
-      }
-      const days  = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const mins  = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-      const secs  = Math.floor((diff % (1000 * 60)) / 1000);
-      document.getElementById('cd-days').textContent  = pad(days);
-      document.getElementById('cd-hours').textContent = pad(hours);
-      document.getElementById('cd-mins').textContent  = pad(mins);
-      document.getElementById('cd-secs').textContent  = pad(secs);
-    }
-    tick();
-    setInterval(tick, 1000);
-  })();
+  /* ══ 앱 다운로드 링크 시스템 ══ */
+  const IOS_URL     = 'https://apps.apple.com/kr/app/%EA%BE%B8%EB%AF%BC/id6756961412';
+  const ANDROID_URL = 'https://play.google.com/store/apps/details?id=com.mainspace.gguminapp&hl=ko';
+
+  /* 기기 감지 → 모바일 iOS는 App Store, 그 외(안드로이드·PC)는 Google Play */
+  function goToStore(label) {
+    const ua = navigator.userAgent || navigator.vendor || window.opera;
+    const isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+    const target = isIOS ? IOS_URL : ANDROID_URL;
+    try {
+      gtag('event','app_download',{event_category:'CTA',event_label:label||'download_btn',store:isIOS?'app_store':'google_play'});
+    } catch(e) {}
+    window.open(target, '_blank');
+  }
 
   /* Nav scroll */
   const nav = document.getElementById('navbar');
@@ -1958,7 +1933,7 @@ nav.scrolled { background: rgba(10,10,10,0.9); backdrop-filter: blur(14px); bord
   }
 
   /* 섹션 도달 트래킹 */
-  const sectionIds = ['hero','problem','agitation','solution','webgl-experience','offer','reviews','narrowing','faq','cta'];
+  const sectionIds = ['hero','problem','agitation','solution','webgl-experience','offer','reviews','faq','cta'];
   const sectionReached = new Set();
   const sectionObserver = new IntersectionObserver((entries) => {
     entries.forEach(e => {
